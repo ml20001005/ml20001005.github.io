@@ -30,4 +30,16 @@
     <content><![CDATA[<p>是什么东西</p>
 ]]></content>
   </entry>
+  <entry>
+    <title>测试分类</title>
+    <url>/2021/03/04/%E6%B5%8B%E8%AF%95%E5%88%86%E7%B1%BB/</url>
+    <content><![CDATA[<p>这是什么????</p>
+]]></content>
+      <categories>
+        <category>javaSE 数据库 spring springMVC Mybatis springBoot springCloud 多线程 JVM</category>
+      </categories>
+      <tags>
+        <tag>前端 后端</tag>
+      </tags>
+  </entry>
 </search>
