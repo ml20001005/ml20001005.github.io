@@ -30,4 +30,19 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>springMVC博客</title>
+    <url>/2021/03/05/springMVC%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>这是关于springMVC的博客</p>
+<p>111111111111111</p>
+<p>22222222222222</p>
+<p>333333333333333</p>
+]]></content>
+      <categories>
+        <category>spring_mvc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
