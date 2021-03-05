@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>博客测试</title>
+    <title>这是JavaSE的博客</title>
     <url>/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</url>
     <content><![CDATA[<p>这是为了测试博客</p>
 <p>1111111</p>
@@ -9,14 +9,14 @@
 <p>333333</p>
 ]]></content>
       <categories>
-        <category>javase</category>
+        <category>java_se</category>
       </categories>
       <tags>
         <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
-    <title>新的博客</title>
+    <title>这是spring的博客</title>
     <url>/2021/03/05/%E6%96%B0%E7%9A%84%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>这个是新的博客</p>
 <p>1111111111</p>
