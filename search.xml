@@ -37,4 +37,22 @@
 
 ]]></content>
   </entry>
+  <entry>
+    <title>博客测试</title>
+    <url>/2021/03/05/%E5%8D%9A%E5%AE%A2%E6%B5%8B%E8%AF%95/</url>
+    <content><![CDATA[<p>这是一篇测试博客</p>
+<p>1111</p>
+<p>2222</p>
+<p>3333</p>
+<p>4444</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wwwwwww</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JAVASE</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
