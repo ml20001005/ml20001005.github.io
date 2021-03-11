@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MyBatis增删改查基本操作 - ml</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="����˺���,MyBatis增删查改基本操作[TOC]
+
+1.增删改查接口类EmpDao
+123456789101112131415public interface EmpDao &amp;#123;    //查询  ,"> 
+    <meta name="author" content="coding"> 
+    <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ml</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">MyBatis增删改查基本操作</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">MyBatis增删改查基本操作</h1>
+        <div class="stuff">
+            <span>三月 11, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <h1 id="MyBatis增删查改基本操作"><a href="#MyBatis增删查改基本操作" class="headerlink" title="MyBatis增删查改基本操作"></a>MyBatis增删查改基本操作</h1><p>[TOC]</p>
+<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EgiK.jpg"></p>
+<h2 id="1-增删改查接口类"><a href="#1-增删改查接口类" class="headerlink" title="1.增删改查接口类"></a>1.增删改查接口类</h2><p>EmpDao</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">EmpDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Emp <span class="title">findEmpByEmpno</span><span class="params">(Integer empno)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateEmp</span><span class="params">(Emp emp)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">deleteEmp</span><span class="params">(Integer empno)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插入</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">insertEmp</span><span class="params">(Emp emp)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-接口类对应-xml映射文件"><a href="#2-接口类对应-xml映射文件" class="headerlink" title="2.接口类对应.xml映射文件"></a>2.接口类对应.xml映射文件</h2><p>EmpDao.xml</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="line">    </span><br><span class="line">&lt;!--namespace:接口的全类名，表示该映射文件对应的接口是哪个--&gt;</span><br><span class="line">&lt;mapper namespace=<span class="string">&quot;com.mashibing.dao.EmpDao&quot;</span>&gt;</span><br><span class="line">    &lt;!--</span><br><span class="line">    select:表示这个操作是一个查询操作</span><br><span class="line">    id表示的是要匹配的方法的名称</span><br><span class="line">    resultType:表示返回值的类型，查询操作必须要包含返回值的类型</span><br><span class="line">    #&#123;属性名&#125;：表示要传递的参数的名称</span><br><span class="line">    --&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;!--查询--&gt;    </span><br><span class="line">    &lt;select id=<span class="string">&quot;findEmpByEmpno&quot;</span> resultType=<span class="string">&quot;com.mashibing.bean.Emp&quot;</span>&gt;</span><br><span class="line">        select * from emp where empno = #&#123;empno&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">        </span><br><span class="line">    &lt;!--增删改操作不需要返回值，增删改返回的是影响的行数，mybatis会自动做判断--&gt;</span><br><span class="line">    &lt;!--插入--&gt;</span><br><span class="line">    &lt;insert id=<span class="string">&quot;insertEmp&quot;</span>&gt;</span><br><span class="line">        <span class="function">insert into <span class="title">emp</span><span class="params">(empno,ename)</span> <span class="title">values</span><span class="params">(#&#123;empno&#125;,#&#123;ename&#125;)</span></span></span><br><span class="line"><span class="function">    &lt;/insert&gt;</span></span><br><span class="line"><span class="function">    </span></span><br><span class="line"><span class="function">    &lt;!--更新--&gt;</span></span><br><span class="line"><span class="function">    &lt;update id</span>=<span class="string">&quot;updateEmp&quot;</span>&gt;</span><br><span class="line">        update emp set ename=#&#123;ename&#125; where empno = #&#123;empno&#125;</span><br><span class="line">    &lt;/update&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!--删除--&gt;</span><br><span class="line">    &lt;delete id=<span class="string">&quot;deleteEmp&quot;</span>&gt;</span><br><span class="line">        delete from emp where empno = #&#123;empno&#125;</span><br><span class="line">    &lt;/delete&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-测试"><a href="#3-测试" class="headerlink" title="3.测试"></a>3.测试</h2><p>MyTest</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定义全局SqlSessionFactory</span></span><br><span class="line">    SqlSessionFactory sqlSessionFactory = <span class="keyword">null</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//@Before注解标记的方法会在所有@Test单元测试方法执行之前调用</span></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// 根据全局配置文件创建出SqlSessionFactory</span></span><br><span class="line">        <span class="comment">// SqlSessionFactory:负责创建SqlSession对象的工厂</span></span><br><span class="line">        <span class="comment">// SqlSession:表示跟数据库建议的一次会话</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//mybatis-config.xml全局配置文件的路径</span></span><br><span class="line">        String resource = <span class="string">&quot;mybatis-config.xml&quot;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//读取mybatis-config.xml全局配置文件的输入流</span></span><br><span class="line">        InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//调用SqlSessionFactoryBuilder类的静态build方法初始化sqlSessionFactory</span></span><br><span class="line">        sqlSessionFactory= <span class="keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//查询</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取数据库的会话</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">         </span><br><span class="line">        <span class="comment">// 获取要调用的接口类</span></span><br><span class="line">        EmpDao mapper = sqlSession.getMapper(EmpDao.class);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 调用方法开始执行</span></span><br><span class="line">        Emp empByEmpno = mapper.findEmpByEmpno(<span class="number">7369</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭会话</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//打印查询结果</span></span><br><span class="line">        System.out.println(empByEmpno);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插入</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test02</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取数据库的会话</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取要调用的接口类</span></span><br><span class="line">        EmpDao mapper = sqlSession.getMapper(EmpDao.class);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//调用方法开始执行</span></span><br><span class="line">        <span class="keyword">int</span> zhangsan = mapper.insertEmp(<span class="keyword">new</span> Emp(<span class="number">1111</span>, <span class="string">&quot;zhangsan&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//打印插入操作影响的行数</span></span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//SqlSessionFactory类的无参openSession()方法默认autocommit自动提交为false,所以需要手动调用sqlSession的commit方法</span></span><br><span class="line">        <span class="comment">//也可以通过调用SqlSessionFactory类的有参openSession(boolen autoCommit)方法,传入参数true,设置autocommit自动提交为true,实现自动提交</span></span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//关闭会话</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test03</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取数据库的会话</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取要调用的接口类</span></span><br><span class="line">        EmpDao mapper = sqlSession.getMapper(EmpDao.class);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//调用方法开始执行</span></span><br><span class="line">        <span class="keyword">int</span> zhangsan = mapper.updateEmp(<span class="keyword">new</span> Emp(<span class="number">1111</span>, <span class="string">&quot;lisi&quot;</span>));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//打印更新操作影响的行数</span></span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//提交</span></span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//关闭会话</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//删除</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test04</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取数据库的会话</span></span><br><span class="line">        SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//获取要调用的接口类</span></span><br><span class="line">        EmpDao mapper = sqlSession.getMapper(EmpDao.class);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//调用方法开始执行</span></span><br><span class="line">        <span class="keyword">int</span> zhangsan = mapper.deleteEmp(<span class="number">1111</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//打印删除操作影响的行数</span></span><br><span class="line">        System.out.println(zhangsan);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//提交</span></span><br><span class="line">        sqlSession.commit();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//关闭会话</span></span><br><span class="line">        sqlSession.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
