@@ -222,4 +222,44 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>springboot基础入门</title>
+    <url>/2021/03/23/springboot%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Edw.jpg"></p>
+<h1 id="maven基础配置springboot"><a href="#maven基础配置springboot" class="headerlink" title="maven基础配置springboot"></a>maven基础配置springboot</h1><h2 id="1-基本pom依赖"><a href="#1-基本pom依赖" class="headerlink" title="1.基本pom依赖"></a>1.基本pom依赖</h2><p>只要是springboot工程就需要在pom中导入父依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.4.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-导入外部依赖"><a href="#2-导入外部依赖" class="headerlink" title="2.导入外部依赖"></a>2.导入外部依赖</h2><p>如果你想要开发web项目, 那么你就需要导入web依赖, 如果是其他项目, 导入相关依赖即可</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="3-关于-SpringBootApplication注解"><a href="#3-关于-SpringBootApplication注解" class="headerlink" title="3.关于@SpringBootApplication注解"></a>3.关于@SpringBootApplication注解</h2><p>一般一个SpringBoot项目中会有一个主程序类, 在这个主程序类的上方我们会加上@SpringBootApplication注解, 代表这是一个主程序类, 用于引导springboot程序的启动, 在主程序类中会有一个main方法, main方法中我们会调用SpringApplication类的run方法, 同时将主程序类, 和args参数传入run方法中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(Application.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过查看@SpringBootApplication注解会发现这个注解除了元注解外多了三个注解, 分别是</p>
+<ol>
+<li>@EnableAutoConfiguration : 启用SpringBoot的自动配置机制</li>
+<li>@ComponentScan : 在应用程序所在的软件包上启用扫描</li>
+<li>@Configuration : 允许在上下文中注册额外的bean或导入其他配置类</li>
+</ol>
+<p>所以@SpringBootApplication注解也可以使用这三个注解替代</p>
+<h2 id="4-关于SpringBoot默认属性值的修改application-properties配置文件"><a href="#4-关于SpringBoot默认属性值的修改application-properties配置文件" class="headerlink" title="4.关于SpringBoot默认属性值的修改application.properties配置文件"></a>4.关于SpringBoot默认属性值的修改application.properties配置文件</h2><p>在classpath类路径下可以配置application.properties配置文件, 在这个配置文件中我们可以修改springboot的属性默认值, 比如修改tomcat端口号</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">server-port</span>=<span class="string">8888</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-关于把项目打成jar包-简化部署"><a href="#5-关于把项目打成jar包-简化部署" class="headerlink" title="5.关于把项目打成jar包, 简化部署"></a>5.关于把项目打成jar包, 简化部署</h2><p>在springboot中提供了一种允许你直接嵌套jar的打包方法, 使用spring-boot-maven-plugin插件, 使用它你只需要在pom中导入相关依赖即可, 依赖导入后在maven中选择LifeCycle -&gt; package, 随后在target目录中就会出现一个项目打包成的jar文件, 在该目录下打开cmd, 输入:  java -jar 包名, 即可运行该程序</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
