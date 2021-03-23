@@ -262,4 +262,119 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>springboot自动配置特性</title>
+    <url>/2021/03/23/springboot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/ElO.jpg"></p>
+<h2 id="1-自动配置"><a href="#1-自动配置" class="headerlink" title="1.自动配置"></a>1.自动配置</h2><p>1.在我们导入web依赖时, tomcat将会自动配置好</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.springMVC也将自动配置好</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-webmvc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.2.13.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.自动配置好web常见功能, 如字符编码问题(过滤器)…</p>
+<h2 id="2-默认包结构"><a href="#2-默认包结构" class="headerlink" title="2.默认包结构"></a>2.默认包结构</h2><p>1.主程序所在包及其所有子包里面的组件都会被默认扫描进来</p>
+<p>2.如需改变扫描路径, 在@SpringBootApplication注解中添加参数scanBasePackages=” “, 指定扫描路径, 或者使用@SpringBootApplication注解中集成的三个注解替换@SpringBootApplication, 在@ComponentScan注解中指定扫描路径</p>
+<h2 id="3-属性默认值"><a href="#3-属性默认值" class="headerlink" title="3.属性默认值"></a>3.属性默认值</h2><p>1.各种属性都有默认值, 相应的属性值被映射到相应的类中</p>
+<p>2.配置文件的值最终会被绑定到某个类上, 这个类会在容器中创建对象</p>
+<h2 id="4-按需加载所有自动配置项"><a href="#4-按需加载所有自动配置项" class="headerlink" title="4.按需加载所有自动配置项"></a>4.按需加载所有自动配置项</h2><p>1.引入了哪些场景, 这个场景的自动配置才会开启</p>
+<p>2.springboot所有的自动配置功能都在spring-boot-autoconfigure里面</p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springboot依赖管理特性</title>
+    <url>/2021/03/23/springboot%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86%E7%89%B9%E6%80%A7/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EfNL.jpg"></p>
+<h2 id="1-父项目的依赖管理"><a href="#1-父项目的依赖管理" class="headerlink" title="1.父项目的依赖管理"></a>1.父项目的依赖管理</h2><p>pom文件中的父项目</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>父项目的父项目</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在spring-boot-dependencies中几乎包含了我们开发中所有常用的依赖版本号, 所以一般在开发中我们导入依赖时不用写版本号, 如果我们需要改变依赖版本, 有如下两种方式</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 1.直接在pom中加properties标签, 设置依赖版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mysql.version</span>&gt;</span>5.1.34<span class="tag">&lt;/<span class="name">mysql.version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 2.在引入的依赖中添加version标签, 设置依赖版本 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.1.43<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-springboot场景启动器spring-boot-starter"><a href="#2-springboot场景启动器spring-boot-starter" class="headerlink" title="2.springboot场景启动器spring-boot-starter"></a>2.springboot场景启动器spring-boot-starter</h2><ol>
+<li><p>spring-boot-starter-*, *就某种场景启动器, 只要引入starter ,这个场景的所有常规需要的依赖我们都自动引入</p>
+</li>
+<li><p>见到的*-spring-boot-starter, 这些都是第三方为我们提供的简化开发的场景启动器</p>
+</li>
+<li><p>所有场景启动器最底层的依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>底层注解@Import</title>
+    <url>/2021/03/23/%E5%BA%95%E5%B1%82%E6%B3%A8%E8%A7%A3-Import/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Es4N.jpg"></p>
+<p><strong>@Import注解用于容器中的组件类之上, 比如</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@Component</span><br><span class="line">@Controller</span><br><span class="line">@Service</span><br><span class="line">@Repository</span><br><span class="line">@Configuration</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;Cat.class,Person.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cat <span class="title">cat01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Cat(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Person zhangsan = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        zhangsan.setCat(cat01()); <span class="comment">//依赖cat01方法</span></span><br><span class="line">        <span class="keyword">return</span> zhangsan;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>用于给容器中自动创建出给定类的组件, 默认组件名为全类名</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.mashibing.entity.Cat</span><br><span class="line">com.mashibing.entity.Person</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>底层注解@Configuration</title>
+    <url>/2021/03/23/%E5%BA%95%E5%B1%82%E6%B3%A8%E8%A7%A3-Configuration/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Es4.jpg"></p>
+<p><strong>@Configuration注解</strong></p>
+<p>1.加在类上告诉springboot这是一个配置类 == 配置文件, 同时这个类也会作为一个组件加入容器中, id为类名首字母小写</p>
+<p>2.类中加了@Bean注解的方法, 会给容器添加组件, 以方法名为id, 返回类型为组件类型, 返回值就是组件在容器中的实例</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cat <span class="title">cat01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Cat(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>注意: 在@Configuration中存在一个属性proxyBeanMethods, 默认值为true</strong></p>
+<p>1.当值为true时, 从容器中获取这个类实例时, 得到的是一个代理对象, 使用代理对象调用带有@Bean注解的方法时, springboot总会检查这个组件是否在容器中存在, 若存在, 直接返回 (保持组件单实例)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.mashibing.config.MyConfig$$EnhancerBySpringCGLIB$$7d9469fa@3569edd5</span><br></pre></td></tr></table></figure>
+
+<p>2.当值为false时, 从容器中获取这个类实例时, 得到的是容器中的实例对象, 使用实例对象调用带有@Bean注解的方法时, 每次返回的对象都是不同的, </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">com.mashibing.config.MyConfig@d4602a</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>Full和Lite</strong></p>
+<p>Full (proxyBeanMethods = true) : full模式</p>
+<p>Lite(proxyBeanMethods = false) : 轻量级模式</p>
+<ul>
+<li>配置类组件之间<strong>无</strong>依赖关系, 用Lite模式加速容器启动过程, 减少判断</li>
+<li>配置类组件之间<strong>有</strong>依赖关系, 方法会被调用, 得到之前单实例组件, 用Full模式</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration(proxyBeanMethods = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Cat <span class="title">cat01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Cat(<span class="string">&quot;tom&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">person01</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Person zhangsan = <span class="keyword">new</span> Person(<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        zhangsan.setCat(cat01()); <span class="comment">//依赖cat01方法</span></span><br><span class="line">        <span class="keyword">return</span> zhangsan;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
