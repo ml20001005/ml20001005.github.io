@@ -493,20 +493,12 @@
     <url>/2021/03/24/lombok/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EVnX.jpg"></p>
 <h5 id="lombok基础注解-及其用法"><a href="#lombok基础注解-及其用法" class="headerlink" title="lombok基础注解, 及其用法"></a>lombok基础注解, 及其用法</h5><ol>
-<li><p>```java<br>@Data</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   用于生成类属性的Getter和Setter方法</span><br><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;java</span><br><span class="line">   @NoArgsConstructor</span><br><span class="line">   @AllArgsConstructor</span><br></pre></td></tr></table></figure>
-
-<p>@NoArgsConstructor : 生成无参构造方法</p>
-<p>@AllArgsConstructor : 生成全参构造方法</p>
-</li>
-<li><p>```<br>@ToString</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   生成toString方法</span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;</span><br><span class="line">   @EqualsAndHashCode</span><br></pre></td></tr></table></figure>
-
-<p>生成equals和hashCode方法</p>
-</li>
-<li><pre><code>@Slf4j
+<li><p>```java<br>@Data<br>用于生成类属性的Getter和Setter方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">2. &#96;&#96;&#96;java</span><br><span class="line">   @NoArgsConstructor   生成无参构造方法</span><br><span class="line">   @AllArgsConstructor  生成全参构造方法</span><br></pre></td></tr></table></figure></li>
+<li><p>```java<br>@ToString   生成toString方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;</span><br><span class="line">   @EqualsAndHashCode   生成equals和hashCode方法</span><br></pre></td></tr></table></figure></li>
+<li><pre><code class="java">@Slf4j   日志注解
 </code></pre>
-<p>日志注解</p>
 </li>
 </ol>
 ]]></content>
@@ -655,6 +647,75 @@
 <h5 id="6-RequestAttribute"><a href="#6-RequestAttribute" class="headerlink" title="6.@RequestAttribute"></a>6.@RequestAttribute</h5><p>将请求域中的属性绑定到方法参数</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/goto&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">goToPage</span><span class="params">(HttpServletRequest httpServletRequest)</span></span>&#123;</span><br><span class="line">        httpServletRequest.setAttribute(<span class="string">&quot;name&quot;</span>,<span class="string">&quot;zhangsan&quot;</span>);</span><br><span class="line">        httpServletRequest.setAttribute(<span class="string">&quot;age&quot;</span>,<span class="number">21</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;forward:/success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/success&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title">success</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="meta">@RequestAttribute(&quot;name&quot;)</span>String name,</span></span></span><br><span class="line"><span class="function"><span class="params">                    <span class="meta">@RequestAttribute(&quot;age&quot;)</span>Integer age,</span></span></span><br><span class="line"><span class="function"><span class="params">                    HttpServletRequest httpServletRequest</span></span></span><br><span class="line"><span class="function"><span class="params">                    )</span></span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        Object name1 = httpServletRequest.getAttribute(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;name&quot;</span>,name);</span><br><span class="line">        map.put(<span class="string">&quot;age&quot;</span>,age);</span><br><span class="line">        map.put(<span class="string">&quot;name1&quot;</span>,name1);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
+
+
+<h5 id="7-MatrixVariable"><a href="#7-MatrixVariable" class="headerlink" title="7.@MatrixVariable"></a>7.@MatrixVariable</h5><p>矩阵变量, springboot默认禁用了矩阵变量功能, 在springboot中的UrlPathHelper设置setRemoveSemicolonContent为true, 也就是说, 默认移除分号后的内容, 想要使用矩阵变量就需要改变这个属性,</p>
+<p>方法一: 实现WebMvcConfigurer接口, 重写configurePathMatch方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configurePathMatch</span><span class="params">(PathMatchConfigurer configurer)</span> </span>&#123;</span><br><span class="line">        UrlPathHelper urlPathHelper = <span class="keyword">new</span> UrlPathHelper();</span><br><span class="line">        urlPathHelper.setRemoveSemicolonContent(<span class="keyword">false</span>);</span><br><span class="line">        configurer.setUrlPathHelper(urlPathHelper);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法二: 在容器中注册一个重写了configurePathMatch方法的WebMvcConfigurer</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WebMvcConfigurer <span class="title">webMvcConfigurer</span><span class="params">()</span></span>&#123;</span><br><span class="line">        WebMvcConfigurer webMvcConfigurer = <span class="keyword">new</span> WebMvcConfigurer() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">configurePathMatch</span><span class="params">(PathMatchConfigurer configurer)</span> </span>&#123;</span><br><span class="line">                UrlPathHelper urlPathHelper = <span class="keyword">new</span> UrlPathHelper();</span><br><span class="line">                urlPathHelper.setRemoveSemicolonContent(<span class="keyword">false</span>);</span><br><span class="line">                configurer.setUrlPathHelper(urlPathHelper);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> webMvcConfigurer;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>@MatrixVariable注解就是把矩阵变量的值绑定到方法参数上</p>
+<p>一个请求</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">localhost:8080&#x2F;tui&#x2F;meitui;changdu&#x3D;90,80,85;wazi&#x3D;heisi,baisi;chuxi&#x3D;zc,cx</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在这个请求中changdu和wazi和baisi都是矩阵变量, 如果变量只有一个值, 那么直接用分号结束, 如果有多个可以使用逗号隔开</li>
+<li>meitui作为一个PathVariable存在</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/tui/&#123;path&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String,Object&gt; <span class="title">tuim</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@MatrixVariable(&quot;changdu&quot;)</span> List&lt;Integer&gt; cd,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@MatrixVariable(&quot;wazi&quot;)</span> List&lt;String&gt; siwa,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@MatrixVariable(&quot;chuxi&quot;)</span> List&lt;String&gt; cx</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@PathVariable(&quot;path&quot;)</span> String path</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;changdu&quot;</span>,cd);</span><br><span class="line">        map.put(<span class="string">&quot;wazi&quot;</span>,siwa);</span><br><span class="line">        map.put(<span class="string">&quot;chuxi&quot;</span>,cx);</span><br><span class="line">        map.put(<span class="string">&quot;path&quot;</span>,path);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&quot;path&quot;:&quot;meitui&quot;,&quot;chuxi&quot;:[&quot;zc&quot;,&quot;cx&quot;],&quot;changdu&quot;:[90,80,85],&quot;wazi&quot;:[&quot;heisi&quot;,&quot;baisi&quot;]&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果在多个PathVariable中存在相同名字的矩阵变量, 那么可以使用@MatrixVariable的pathVar属性指定想要绑定到方法参数的变量是哪个PathVariable的</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">localhost:8080&#x2F;car&#x2F;good;price&#x3D;99999&#x2F;bad;price&#x3D;666</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/car/&#123;good&#125;/&#123;bad&#125;&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map <span class="title">carsCell</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@MatrixVariable(pathVar = &quot;good&quot;,value = &quot;price&quot;)</span>Integer price,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@MatrixVariable(pathVar = &quot;bad&quot;,value = &quot;price&quot;)</span>Integer price2,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="meta">@PathVariable(&quot;good&quot;)</span>String path</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>&#123;</span><br><span class="line">        Map&lt;String,Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        map.put(<span class="string">&quot;price&quot;</span>,price);</span><br><span class="line">        map.put(<span class="string">&quot;price2&quot;</span>,price2);</span><br><span class="line">        map.put(<span class="string">&quot;path&quot;</span>,path);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>springboot之模板引擎Thymeleaf</title>
+    <url>/2021/03/28/springboot%E4%B9%8B%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8EThymeleaf/</url>
+    <content><![CDATA[<h5 id="1-使用thymelead"><a href="#1-使用thymelead" class="headerlink" title="1.使用thymelead"></a>1.使用thymelead</h5><p>导入starter</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-thymelead自动配置"><a href="#2-thymelead自动配置" class="headerlink" title="2.thymelead自动配置"></a>2.thymelead自动配置</h5><p>在ThymeleafProperties中已经配置好了一些基本属性, 比如页面的访问前缀和后缀, 我们只需要在classpath目录下编写html页面即可</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">&quot;classpath:/templates/&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">&quot;.html&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-命名空间和-th"><a href="#3-命名空间和-th" class="headerlink" title="3.命名空间和$ @ th:"></a>3.命名空间和$ @ th:</h5><p>在html页面中我们使用thymelead需要导入thymelead的命名空间</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用于替换文本的 th:text , 在下面这个标签中 “哈哈哈” 将会被替换成 “这个改写text”</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">th:text</span>=<span class="string">&quot;这个改写text&quot;</span>&gt;</span>哈哈哈哈<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面这个 “啦啦啦” 将会被替换成请求域中msg的属性值</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;msg&#125;&quot;</span>&gt;</span>啦啦啦啦<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>th:href就是替换链接</p>
+</li>
+<li><p>$:  下面的第一条链接会被替换成请求域中link的属性值</p>
+</li>
+<li><p>@:  下面第二条链接会被直接替换成中括号的内容, 如果设置了应用程序上下文路径, 他会自动添加相关路径</p>
+</li>
+<li><p>```yml<br>server:<br>  servlet:</p>
+<pre><code>context-path: /application
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 下面的第三条链接会被直接替换成th:href的文本内容</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;html</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;$&#123;link&#125;&quot;&gt;百度1&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;@&#123;&#x2F;link&#x2F;aaaaa&#125;&quot;&gt;百度2&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;ppppppppppppp&quot;&gt;百度3&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 ]]></content>
       <categories>
         <category>springboot</category>

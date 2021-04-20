@@ -5,15 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>lombok - ml</title>
+    <title>springboot之模板引擎Thymeleaf - ml</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="����˺���,
-lombok基础注解, 及其用法
-```java@Data用于生成类属性的Getter和Setter方法
-123456      2. &amp;#96;&amp;#96;&amp;#96;java   @NoArgsC,"> 
+    <meta name="description" content="����˺���,1.使用thymelead导入starter
+1234&amp;lt;dependency&amp;gt;            &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt,"> 
     <meta name="author" content="coding"> 
     <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -41,7 +39,7 @@ lombok基础注解, 及其用法
     <div class="bar" style="width: 0;"></div>
     <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
     <div title="播放/暂停" class="iconfont icon-play"></div>
-    <h3 class="subtitle">lombok</h3>
+    <h3 class="subtitle">springboot之模板引擎Thymeleaf</h3>
     <div class="social">
         <div>
             <div class="share">
@@ -56,25 +54,46 @@ lombok基础注解, 及其用法
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">lombok</h1>
+        <h1 class="title">springboot之模板引擎Thymeleaf</h1>
         <div class="stuff">
-            <span>三月 24, 2021</span>
+            <span>三月 28, 2021</span>
             
   <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
 
         </div>
         <div class="content markdown">
-            <p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EVnX.jpg"></p>
-<h5 id="lombok基础注解-及其用法"><a href="#lombok基础注解-及其用法" class="headerlink" title="lombok基础注解, 及其用法"></a>lombok基础注解, 及其用法</h5><ol>
-<li><p>```java<br>@Data<br>用于生成类属性的Getter和Setter方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">2. &#96;&#96;&#96;java</span><br><span class="line">   @NoArgsConstructor   生成无参构造方法</span><br><span class="line">   @AllArgsConstructor  生成全参构造方法</span><br></pre></td></tr></table></figure></li>
-<li><p>```java<br>@ToString   生成toString方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">4. &#96;&#96;&#96;</span><br><span class="line">   @EqualsAndHashCode   生成equals和hashCode方法</span><br></pre></td></tr></table></figure></li>
-<li><pre><code class="java">@Slf4j   日志注解
-</code></pre>
+            <h5 id="1-使用thymelead"><a href="#1-使用thymelead" class="headerlink" title="1.使用thymelead"></a>1.使用thymelead</h5><p>导入starter</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-thymelead自动配置"><a href="#2-thymelead自动配置" class="headerlink" title="2.thymelead自动配置"></a>2.thymelead自动配置</h5><p>在ThymeleafProperties中已经配置好了一些基本属性, 比如页面的访问前缀和后缀, 我们只需要在classpath目录下编写html页面即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">&quot;classpath:/templates/&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">&quot;.html&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-命名空间和-th"><a href="#3-命名空间和-th" class="headerlink" title="3.命名空间和$ @ th:"></a>3.命名空间和$ @ th:</h5><p>在html页面中我们使用thymelead需要导入thymelead的命名空间</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span> <span class="attr">xmlns:th</span>=<span class="string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>用于替换文本的 th:text , 在下面这个标签中 “哈哈哈” 将会被替换成 “这个改写text”</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">th:text</span>=<span class="string">&quot;这个改写text&quot;</span>&gt;</span>哈哈哈哈<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>下面这个 “啦啦啦” 将会被替换成请求域中msg的属性值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">th:text</span>=<span class="string">&quot;$&#123;msg&#125;&quot;</span>&gt;</span>啦啦啦啦<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>th:href就是替换链接</p>
 </li>
-</ol>
+<li><p>$:  下面的第一条链接会被替换成请求域中link的属性值</p>
+</li>
+<li><p>@:  下面第二条链接会被直接替换成中括号的内容, 如果设置了应用程序上下文路径, 他会自动添加相关路径</p>
+</li>
+<li><p>```yml<br>server:<br>  servlet:</p>
+<pre><code>context-path: /application
+</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 下面的第三条链接会被直接替换成th:href的文本内容</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;html</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;$&#123;link&#125;&quot;&gt;百度1&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;@&#123;&#x2F;link&#x2F;aaaaa&#125;&quot;&gt;百度2&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;a href&#x3D;&quot;www.baidu.com&quot; th:href&#x3D;&quot;ppppppppppppp&quot;&gt;百度3&lt;&#x2F;a&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
