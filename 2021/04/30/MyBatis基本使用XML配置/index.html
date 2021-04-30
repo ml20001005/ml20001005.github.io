@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MyBatis基本使用XML配置 - ml</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="����˺���,
+MyBatis XML配置1.xml结构概览MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：
+
+configuration（配置）
+pr,"> 
+    <meta name="author" content="coding"> 
+    <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ml</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">MyBatis基本使用XML配置</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">MyBatis基本使用XML配置</h1>
+        <div class="stuff">
+            <span>四月 30, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/El0D.jpg"></p>
+<h1 id="MyBatis-XML配置"><a href="#MyBatis-XML配置" class="headerlink" title="MyBatis XML配置"></a>MyBatis XML配置</h1><h6 id="1-xml结构概览"><a href="#1-xml结构概览" class="headerlink" title="1.xml结构概览"></a>1.xml结构概览</h6><p>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：</p>
+<ul>
+<li>configuration（配置）<ul>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#properties">properties（属性）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#settings">settings（设置）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#typeAliases">typeAliases（类型别名）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#typeHandlers">typeHandlers（类型处理器）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#objectFactory">objectFactory（对象工厂）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#plugins">plugins（插件）</a></li>
+<li>environments（环境配置）<ul>
+<li>environment（环境变量）<ul>
+<li>transactionManager（事务管理器）</li>
+<li>dataSource（数据源）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#databaseIdProvider">databaseIdProvider（数据库厂商标识）</a></li>
+<li><a target="_blank" rel="noopener" href="https://mybatis.org/mybatis-3/zh/configuration.html#mappers">mappers（映射器）</a></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注意:  必须严格按照顺序编写xml配置, 否则会报错</p>
+</blockquote>
+<h6 id="2-各项配置的基本使用"><a href="#2-各项配置的基本使用" class="headerlink" title="2.各项配置的基本使用"></a>2.各项配置的基本使用</h6><ul>
+<li><h3 id="属性-properties"><a href="#属性-properties" class="headerlink" title="属性(properties )"></a>属性(properties )</h3><p>这些属性可以在外部进行配置，并可以进行动态替换。你既可以在典型的 Java 属性文件中配置这些属性，也可以在 properties 元素的子元素中设置。例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">properties</span> <span class="attr">resource</span>=<span class="string">&quot;org/mybatis/example/config.properties&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;dev_user&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;F2Fa3!33TYyg&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>resource: 引入类路径下的properties配置文件</code></p>
+<p><code>如果在外部配置文件中和properties 元素的子元素中存在同名的元素, 优先使用外部配置文件中的元素值</code></p>
+</li>
+<li><h3 id="设置（settings）"><a href="#设置（settings）" class="headerlink" title="设置（settings）"></a>设置（settings）</h3><p>这是 MyBatis 中极为重要的调整设置，它们会改变 MyBatis 的运行时行为。 下表描述了设置中各项设置的含义、默认值等。</p>
+<blockquote>
+<p><em>以下是常用的几个设置</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>设置名</th>
+<th>描述</th>
+<th>有效值</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cacheEnabled</td>
+<td>全局性地开启或关闭所有映射器配置文件中已配置的任何缓存。</td>
+<td>true|false</td>
+<td>true</td>
+</tr>
+<tr>
+<td>useGeneratedKeys</td>
+<td>允许 JDBC 支持自动生成主键，需要数据库驱动支持。如果设置为 true，将强制使用自动生成主键。尽管一些数据库驱动不支持此特性，但仍可正常工作（如 Derby）。</td>
+<td>true|false</td>
+<td>False</td>
+</tr>
+<tr>
+<td>mapUnderscoreToCamelCase</td>
+<td>是否开启驼峰命名自动映射，即从经典数据库列名 A_COLUMN 映射到经典 Java 属性名 aColumn。</td>
+<td>true|false</td>
+<td>False</td>
+</tr>
+<tr>
+<td>logImpl</td>
+<td>指定 MyBatis 所用日志的具体实现，未指定时将自动查找。</td>
+<td>SLF4J|LOG4J|LOG4J2|JDK_LOGGING|COMMONS_LOGGING|STDOUT_LOGGING|NO_LOGGING</td>
+<td>未设置</td>
+</tr>
+</tbody></table>
+<p><code>cacheEnabled</code>: 一级缓存默认是开启的, 设置二级缓存时建议也显示的设置缓存开启, 尽管默认情况缓存是开启的</p>
+<p>开启二级缓存, 在SQL 映射文件中添加一行：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cache</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>也可设置更多属性</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;cache</span><br><span class="line">  eviction=&quot;FIFO&quot;</span><br><span class="line">  flushInterval=&quot;60000&quot;</span><br><span class="line">  size=&quot;512&quot;</span><br><span class="line">  readOnly=&quot;true&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>useGeneratedKeys</code>: 对于支持自动生成记录主键的数据库，如：MySQL，SQL Server，此时设置useGeneratedKeys参数值为true，在执行添加记录之后可以获取到数据库自动生成的主键ID。如下代码, 在设置中开启<code>useGeneratedKeys</code>设置, 该插入操作, 数据库表中自动生成的主键id值将会返回, 并赋值给实体对象的id属性, 若有多个列会自动生成, 可以指定具体的列名<code>keyColumn=&quot;&quot;</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">settings</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">&quot;useGeneratedKeys&quot;</span> <span class="attr">value</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">settings</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;insert&quot;</span> <span class="attr">parameterType</span>=<span class="string">&quot;com.ml.pojo.Book&quot;</span> <span class="attr">keyProperty</span>=<span class="string">&quot;id&quot;</span> <span class="attr">keyColumn</span>=<span class="string">&quot;id&quot;</span>&gt;</span></span><br><span class="line">        insert into book(book_name,price) values(#&#123;book_name&#125;,#&#123;price&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>mapUnderscoreToCamelCase</code>: 是否开启驼峰命名自动映射, 数据库中常见列名存在下划线, 例如book_name, 此时如果要将该列映射到实体类中, 那么实体类属性值就需命名为book_name, 但是java中常见属性命名为bookName, 这与常规不符, 此时开启驼峰命名自动映射可以使数据库中以下划线命名的列直接映射到常见java属性上, 也就是book_name可以直接映射到bookName</p>
+<p><code>logImpl</code>: 配置日志</p>
+<ul>
+<li><p>第一步: 导入maven依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/log4j/log4j --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2.17<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>第二步: <code>log4j.properties</code>配置文件</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 全局日志配置</span></span><br><span class="line"><span class="meta">log4j.rootLogger</span>=<span class="string">ERROR, stdout</span></span><br><span class="line"><span class="comment"># MyBatis 日志配置</span></span><br><span class="line"><span class="meta">log4j.logger.org.mybatis.example.BlogMapper</span>=<span class="string">TRACE</span></span><br><span class="line"><span class="comment"># 控制台输出</span></span><br><span class="line"><span class="meta">log4j.appender.stdout</span>=<span class="string">org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout</span>=<span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout.ConversionPattern</span>=<span class="string">%5p [%t] - %m%n</span></span><br></pre></td></tr></table></figure>
+
+<p>上述配置将使 Log4J 详细打印 <code>org.mybatis.example.BlogMapper</code> 的日志</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="类型别名（typeAliases）"><a href="#类型别名（typeAliases）" class="headerlink" title="类型别名（typeAliases）"></a>类型别名（typeAliases）</h3><p>​    类型别名可为 Java 类型设置一个缩写名字。 它仅用于 XML 配置，意在降低冗余的全限定类名书写。例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Author&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Author&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Blog&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Blog&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Comment&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Comment&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Post&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Post&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Section&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Section&quot;</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">typeAlias</span> <span class="attr">alias</span>=<span class="string">&quot;Tag&quot;</span> <span class="attr">type</span>=<span class="string">&quot;domain.blog.Tag&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当这样配置时，<code>Blog</code> 可以用在任何使用 <code>domain.blog.Blog</code> 的地方。</p>
+<p>也可以指定一个包名，MyBatis 会在包名下面搜索需要的 Java Bean，比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">typeAliases</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;domain.blog&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">typeAliases</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>每一个在包 <code>domain.blog</code> 中的 Java Bean，在没有注解的情况下，会使用 Bean 的首字母小写的非限定类名来作为它的别名。 比如 <code>domain.blog.Author</code> 的别名为 <code>author</code>；若有注解，则别名为其注解值。见下面的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Alias(&quot;author&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Author</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><h3 id="映射器（mappers）"><a href="#映射器（mappers）" class="headerlink" title="映射器（mappers）"></a>映射器（mappers）</h3><p>既然 MyBatis 的行为已经由上述元素配置完了，我们现在就要来定义 SQL 映射语句了。 但首先，我们需要告诉 MyBatis 到哪里去找到这些语句。 在自动查找资源方面，Java 并没有提供一个很好的解决方案，所以最好的办法是直接告诉 MyBatis 到哪里去找映射文件。 你可以使用相对于类路径的资源引用，或完全限定资源定位符（包括 <code>file:///</code> 形式的 URL），或类名和包名等。例如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用相对于类路径的资源引用 --&gt;</span><br><span class="line">&lt;!-- 建议使用 --&gt;</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">  &lt;mapper resource=<span class="string">&quot;org/mybatis/builder/AuthorMapper.xml&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper resource=<span class="string">&quot;org/mybatis/builder/BlogMapper.xml&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper resource=<span class="string">&quot;org/mybatis/builder/PostMapper.xml&quot;</span>/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用完全限定资源定位符（URL） --&gt;</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">  &lt;mapper url=<span class="string">&quot;file:///var/mappers/AuthorMapper.xml&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper url=<span class="string">&quot;file:///var/mappers/BlogMapper.xml&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper url=<span class="string">&quot;file:///var/mappers/PostMapper.xml&quot;</span>/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 使用映射器接口实现类的完全限定类名 --&gt;</span><br><span class="line">注意: 使用这种方法mapper接口和映射文件需要在同一目录下</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">  &lt;mapper <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.mybatis.builder.AuthorMapper&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.mybatis.builder.BlogMapper&quot;</span>/&gt;</span><br><span class="line">  &lt;mapper <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.mybatis.builder.PostMapper&quot;</span>/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 将包内的映射器接口实现全部注册为映射器 --&gt;</span><br><span class="line">注意: 使用这种方法mapper接口和映射文件需要在同一目录下</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">  &lt;<span class="keyword">package</span> name=<span class="string">&quot;org.mybatis.builder&quot;</span>/&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这些配置会告诉 MyBatis 去哪里找映射文件</p>
+</li>
+</ul>
+</li>
+</ul>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
