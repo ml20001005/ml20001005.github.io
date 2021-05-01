@@ -1022,4 +1022,30 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spring命名空间之c和p</title>
+    <url>/2021/05/01/Spring%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B9%8Bc%E5%92%8Cp/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Es4o.jpg"></p>
+<h1 id="Spring命名空间之c和p"><a href="#Spring命名空间之c和p" class="headerlink" title="Spring命名空间之c和p"></a>Spring命名空间之c和p</h1><h6 id="1-c命名空间"><a href="#1-c命名空间" class="headerlink" title="1.c命名空间"></a>1.c命名空间</h6><p>如需使用c命名空间, 需在xml配置文件中给beans添加如下属性</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:c=&quot;http://www.springframework.org/schema/c&quot;</span><br></pre></td></tr></table></figure>
+
+<p>c命名空间其实就是<code>调用有参构造方法</code>创建对象</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cat1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Cat&quot;</span> <span class="attr">c:name</span>=<span class="string">&quot;小花猫2&quot;</span> <span class="attr">c:gender</span>=<span class="string">&quot;公&quot;</span> <span class="attr">c:color</span>=<span class="string">&quot;花色&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-p命名空间"><a href="#2-p命名空间" class="headerlink" title="2.p命名空间"></a>2.p命名空间</h6><p>如需使用p命名空间, 需在xml配置文件中给beans添加如下属性</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</span><br></pre></td></tr></table></figure>
+
+<p>p命名空间其实就是<code>调用无参构造方法</code>创建对象, 使用<code>set</code>方法注入属性值</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cat2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Cat&quot;</span> <span class="attr">p:name</span>=<span class="string">&quot;小花猫&quot;</span> <span class="attr">p:gender</span>=<span class="string">&quot;公&quot;</span> <span class="attr">p:color</span>=<span class="string">&quot;花色&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
