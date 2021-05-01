@@ -1048,4 +1048,191 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spring之自动装配</title>
+    <url>/2021/05/01/Spring%E4%B9%8B%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EpkI.jpg"></p>
+<h1 id="Spring之自动装配"><a href="#Spring之自动装配" class="headerlink" title="Spring之自动装配"></a>Spring之自动装配</h1><h6 id="1-基于xml方式的自动装配"><a href="#1-基于xml方式的自动装配" class="headerlink" title="1.基于xml方式的自动装配"></a>1.基于xml方式的自动装配</h6><ul>
+<li><p>byName</p>
+<p>使用set方法注入属性值</p>
+<p>根据set方法的方法名去除set后小写, 以这个为bean的名字去容器中查找, 找到就装配, 找不到就为null, 实现自动装配</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cat&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Cat&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;猫咪&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雄性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;花色&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dog&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Dog&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;狗子&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雌性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;黄白&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;boss&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Boss&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byName&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;cat&quot; ref=&quot;cat&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;dog&quot; ref=&quot;dog&quot;/&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>byType</p>
+<p>使用set方法注入属性值</p>
+<p>使用byType自动装配时, 需保证对应类型的bean在容器中是唯一的, 否则报错</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cat&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Cat&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;猫咪&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雄性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;花色&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dog&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Dog&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;狗子&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雌性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;黄白&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;boss&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Boss&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;byType&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;cat&quot; ref=&quot;cat&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;dog&quot; ref=&quot;dog&quot;/&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>constructor</p>
+<p>使用constructor构造器注入属性值</p>
+<p>按照构造器进行装配，先按照有参构造器参数的类型进行装配，没有就直接装配null；如果按照类型找到了多个，那么就使用构造器的参数列表的参数名作为id继续匹配，找到就装配，找不到就装配null</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;cat&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Cat&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;猫咪&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雄性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;花色&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;dog&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Dog&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;狗子&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">value</span>=<span class="string">&quot;雌性&quot;</span>/&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">value</span>=<span class="string">&quot;黄白&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;boss&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Boss&quot;</span> <span class="attr">autowire</span>=<span class="string">&quot;constructor&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;cat&quot; ref=&quot;cat&quot;/&gt;--&gt;</span></span><br><span class="line"><span class="comment">&lt;!--        &lt;property name=&quot;dog&quot; ref=&quot;dog&quot;/&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="2-基于注解方式的自动装配"><a href="#2-基于注解方式的自动装配" class="headerlink" title="2.基于注解方式的自动装配"></a>2.基于注解方式的自动装配</h6><p>使用注解方式的自动装配需给xml配置文件中的beans添加如下属性</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br></pre></td></tr></table></figure>
+
+<p>xsi:schemaLocation再添加如下两行</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">http://www.springframework.org/schema/context</span><br><span class="line">http://www.springframework.org/schema/context/spring-context.xsd</span><br></pre></td></tr></table></figure>
+
+<p>xml配置文件中添加如下内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>@Autowired</code></li>
+</ul>
+<p>添加在实体类属性上时, 代表该属性使用自动装配, 首先根据属性类型去容器中查找, 如果该类型只有一个, 那么直接使用该bean进行自动装配, 如果找到了多个, 那么再使用属性名去匹配, 如果没有匹配的那么报错, 如果找到了, 那么装配</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>设置<code>@Autowired</code>的属性<code>required</code></p>
+<p>默认<code>required为true</code>, 意为必要的, 也就是被<code>@Autowired</code>修饰的属性必须装配, 不能为null, 否则报错, 如果想设置<code>@Autowired</code>修饰的属性可以为null, 那么可以设置<code>@Autowired</code>的<code>required</code>属性值为<code>false</code>, 也就是不必要的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired(required = false)</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">    <span class="meta">@Autowired(required = false)</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用另一个注解代替设置<code>required</code>, 达到使修饰的属性可以为空的效果</p>
+<ul>
+<li><code>@Nullable</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>@Qualifier</code></li>
+</ul>
+<p>这个注解用于给自动装配的属性设置名字, 当一个属性同时被<code>@Autowired</code>和<code>@Qualifier</code>修饰时, 查找方式变为通过名字在容器中查找, 这个属性的自动装配需要在容器中找到一个名字为<code>@Qualifier</code>设置的bean, 如果找不到, 那么报错, 可以认为<code>@Autowired</code>和<code>@Qualifier</code>修饰的属性是通过<code>@Qualifier</code>中设置的名字去容器中查找bean, 找到就装配, 找不到就报错</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Qualifier(&quot;cat3&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Qualifier(&quot;dog3&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意1: 如果只使用了<code>@Autowired</code>注解, 同时设置了允许属性为空(设置了<code>required</code>为false或者使用了<code>@Nullable</code>注解), 如果容器中不存在对应属性类型的bean, 那么这个属性会被设置为null, 如果容器中存在多个对应属性类型的bean, 但是没有一个bean的名字和属性名匹配, 那么会报错, 属性不会被设置为null</p>
+</blockquote>
+<blockquote>
+<p>注意2: 如果使用了<code>@Autowired</code>和<code>@Qualifier</code>注解, 当没有设置允许属性为null时, 如果容器中没有找到名字为<code>Qualifier</code>设置的bean, 那么会报错, 如果设置了允许属性为null, 那么找不到名字为<code>Qualifier</code>设置的bean, 属性会被设置为null, 同时不会报错</p>
+</blockquote>
+<ul>
+<li><p><code>@Resource</code></p>
+<p>这个是jdk提供的自动装配注解, 先通过名字在容器中查找 , 再通过类型, 如果用名字找到了, 那么直接装配, 如果找不到, 就用属性类型继续查找, 如果找到了一个, 那么直接装配, 如果找到了多个, 那么报错</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">	<span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当设置了<code>@Resource</code>的name属性时, 查找方式将变为通过设置的名字去查找, 无论是否设置属性允许为null, 如果找到就装配, 如果找不到, 就报错, </p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Boss</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Resource(name = &quot;cat2&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Cat cat;</span><br><span class="line">	<span class="meta">@Resource(name = &quot;dog2&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring之bean的作用域</title>
+    <url>/2021/05/01/Spring%E4%B9%8Bbean%E7%9A%84%E4%BD%9C%E7%94%A8%E5%9F%9F/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Eob.jpg"></p>
+<h1 id="Spring之bean的作用域"><a href="#Spring之bean的作用域" class="headerlink" title="Spring之bean的作用域"></a>Spring之bean的作用域</h1><table>
+<thead>
+<tr>
+<th><strong>Scope</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-singleton">singleton</a></td>
+<td>（默认值）将每个Spring IoC容器的单个bean定义范围限定为单个对象实例。</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-prototype">prototype</a></td>
+<td>将单个bean定义的作用域限定为任意数量的对象实例。</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-request">request</a></td>
+<td>将单个bean定义的范围限定为单个HTTP请求的生命周期。也就是说，每个HTTP请求都有一个在单个bean定义的后面创建的bean实例。仅在可感知网络的Spring上下文中有效<code>ApplicationContext</code>。</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-session">session</a></td>
+<td>将单个bean定义的范围限定为HTTP的生命周期<code>Session</code>。仅在可感知网络的Spring上下文中有效<code>ApplicationContext</code>。</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes-application">application</a></td>
+<td>将单个bean定义的作用域限定为的生命周期<code>ServletContext</code>。仅在可感知网络的Spring上下文中有效<code>ApplicationContext</code>。</td>
+</tr>
+<tr>
+<td><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-websocket-scope">websocket</a></td>
+<td>将单个bean定义的作用域限定为的生命周期<code>WebSocket</code>。仅在基于Web的Spring上下文中有效<code>ApplicationContext</code>.</td>
+</tr>
+</tbody></table>
+<p>在bean中设置scope属性的属性值调整bean的作用域</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;address&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.Address&quot;</span> <span class="attr">scope</span>=<span class="string">&quot;prototype&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring注解开发</title>
+    <url>/2021/05/01/Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EXBN.jpg"></p>
+<h1 id="Spring注解开发"><a href="#Spring注解开发" class="headerlink" title="Spring注解开发"></a>Spring注解开发</h1><h6 id="1-使用了配置文件"><a href="#1-使用了配置文件" class="headerlink" title="1.使用了配置文件"></a>1.使用了配置文件</h6><ol>
+<li><p>开启注解扫描</p>
+<p>在xml配置文件中添加如下代码</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">&quot;com.ml.pojo&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>base-package</code>: 定义扫描路径</p>
+<p>路径下的所有组件都将被注册为bean对象, 存在于IOC容器中</p>
+</li>
+<li><p>组件注解</p>
+<p>添加有如下任意注解的对象都将被注册为bean对象, 存在于容器中</p>
+<ul>
+<li><p>@Component</p>
+</li>
+<li><p>@Repository</p>
+</li>
+<li><p>@Service</p>
+</li>
+<li><p>@Controller</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TomCat</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>其他注解</p>
+<ul>
+<li><p>@Scope</p>
+<p>用于设置bean的作用域</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Scope(&quot;prototype&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TomCat</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Value</p>
+<p>用于注入属性值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TomCat</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Value(&quot;Tom猫&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="meta">@Value(&quot;男&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="meta">@Value(&quot;20&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h6 id="2-没有使用配置文件"><a href="#2-没有使用配置文件" class="headerlink" title="2.没有使用配置文件"></a>2.没有使用配置文件</h6><p><code>注解</code></p>
+<ul>
+<li><p>@Configuration</p>
+<p>用于修饰类, 代表这是一个spring配置类, 同时这个配置类也会被注册为一个组件, 存在于IOC容器中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Import</p>
+<p>用于修饰类, 用于导入别的配置类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@Import(MyConfig2.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@ComponentScan</p>
+<p>用于修饰类, 开启注解扫描, 指定扫描路径, 路径下的所有组件都会被注册为bean对象, 存在于IOC容器中</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;com.ml.pojo&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Bean</p>
+<p>被@Bean修饰的方法会返回一个bean对象, 并且存在于IOC容器中, 对象的名字就是方法名</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>在没有使用配置文件的情况如何获取bean对象 ?</p>
+</blockquote>
+<p>使用AnnotationConfigApplicationContext类(ApplicationContext的子类), 传入配置类作为参数</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test08</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ApplicationContext context = <span class="keyword">new</span> AnnotationConfigApplicationContext(MyConfig.class);</span><br><span class="line">    Jim jim = context.getBean(<span class="string">&quot;jim&quot;</span>, Jim.class);</span><br><span class="line">    System.out.println(jim);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
