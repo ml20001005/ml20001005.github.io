@@ -1235,4 +1235,75 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringAop基本使用</title>
+    <url>/2021/05/02/SpringAop%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/EX93.png"></p>
+<h1 id="SpringAop基本使用"><a href="#SpringAop基本使用" class="headerlink" title="SpringAop基本使用"></a>SpringAop基本使用</h1><h5 id="一-使用springAPI接口"><a href="#一-使用springAPI接口" class="headerlink" title="一.使用springAPI接口"></a>一.使用springAPI接口</h5><h6 id="1-pom依赖"><a href="#1-pom依赖" class="headerlink" title="1.pom依赖"></a>1.pom依赖</h6><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-aop约束"><a href="#2-aop约束" class="headerlink" title="2.aop约束"></a>2.aop约束</h6><p>在xml中添加如下约束</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">http://www.springframework.org/schema/aop</span><br><span class="line">http://www.springframework.org/schema/aop/spring-aop.xsd</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3-配置aop"><a href="#3-配置aop" class="headerlink" title="3.配置aop"></a>3.配置aop</h6><p>在xml中添加如下代码</p>
+<p><code>aop:pointcut</code> : 定义切入点</p>
+<p><code>aop:advisor</code> : 定义通知</p>
+<p><code>expression</code> : 定义表达式, execution表达式组成: 方法修饰符 + 方法返回类型 + 具体类路径 + 方法名 + 参数</p>
+<ul>
+<li>方法修饰符 : 可以省略, 或使用 <code>*</code> , 或具体指定</li>
+<li>方法返回类型 : 不可以省略, 可以用 <code>*</code> , 或具体指定</li>
+<li>具体类路径 : 不可以省略, 必须详细指定</li>
+<li>方法名 : 可以用 <code>*</code> , 或具体指定</li>
+<li>参数 : 可以用 <code>..</code> 代替, 或具体指定类型</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;before&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.aop.BeforeAdviceDemo&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;after&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.aop.AfterAdviecDemo&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;userservice&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.pojo.UserServiceImpl&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    execution表达式组成: 方法修饰符 方法返回类型 具体类路径 方法名 参数    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;pointcut&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution(* com.ml.pojo.UserService.*(..))&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;before&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;pointcut&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;after&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;pointcut&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4-Advice实例"><a href="#4-Advice实例" class="headerlink" title="4.Advice实例"></a>4.Advice实例</h6><p>实现接口创建</p>
+<ul>
+<li><p><code>MethodBeforeAdvice</code>接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeforeAdviceDemo</span> <span class="keyword">implements</span> <span class="title">MethodBeforeAdvice</span> </span>&#123;</span><br><span class="line"><span class="comment">//    方法执行之前的处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">(Method method, Object[] args, Object target)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(target.getClass().getName() + <span class="string">&quot;的方法&quot;</span> + method.getName() + <span class="string">&quot;被调用&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>AfterReturningAdvice</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AfterAdviecDemo</span> <span class="keyword">implements</span> <span class="title">AfterReturningAdvice</span> </span>&#123;</span><br><span class="line"><span class="comment">//    方法返回之后的处理</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterReturning</span><span class="params">(Object returnValue, Method method, Object[] args, Object target)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(target.getClass().getName() + <span class="string">&quot;的方法&quot;</span> + method.getName() + <span class="string">&quot;返回完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="二-使用切面"><a href="#二-使用切面" class="headerlink" title="二.使用切面"></a>二.使用切面</h5><ol>
+<li><p>切面类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//切面类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AspectDemo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;==========方法开始执行==========&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;==========方法执行结束==========&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>切面类注入容器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;aspect&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.ml.aop.AspectDemo&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用切面类</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;pointcut&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">&quot;aspect&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">&quot;after&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;pointcut&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">method</span>=<span class="string">&quot;before&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;pointcut&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="三-使用注解"><a href="#三-使用注解" class="headerlink" title="三.使用注解"></a>三.使用注解</h5><ol>
+<li><p>开启aop注解</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:aspectj-autoproxy</span>/&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>注解</p>
+<ul>
+<li><p>@Aspect : 切面注解, 代表这是一个切面类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationAspect</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Before : 前置通知, 需指定切入点表达式, <code>@Before(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;=====注解--方法执行之前=====&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@After : 后置通知, 需指定切入点表达式, <code>@Before(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;=====注解--方法执行之后=====&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>@Around : 环绕通知, 需指定切入点表达式, <code>@Before(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</code></p>
+<blockquote>
+<p>Proceedingjoinpoint 继承了 JoinPoint。是在JoinPoint的基础上暴露出 proceed 这个方法。proceed很重要，这个是aop代理链执行的方法。环绕通知=前置+目标方法执行+后置通知，proceed方法就是用于启动目标方法执行的.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnnotationAspect</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.ml.pojo.UserServiceImpl.*(..))&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===环绕前===&quot;</span>);</span><br><span class="line">        joinPoint.proceed();</span><br><span class="line">        System.out.println(<span class="string">&quot;===环绕后===&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
