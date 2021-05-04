@@ -1391,4 +1391,91 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Spring声明式事务</title>
+    <url>/2021/05/04/Spring%E5%A3%B0%E6%98%8E%E5%BC%8F%E4%BA%8B%E5%8A%A1/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/Eo9Q.jpg"></p>
+<h1 id="Spring声明式事务"><a href="#Spring声明式事务" class="headerlink" title="Spring声明式事务"></a>Spring声明式事务</h1><h6 id="1-事务ACID原则"><a href="#1-事务ACID原则" class="headerlink" title="1.事务ACID原则"></a>1.事务ACID原则</h6><ul>
+<li><p>原子性</p>
+<p>一个事务要么全部提交成功，要么全部失败回滚，不能只执行其中的一部分操作，这就是事务的原子性</p>
+</li>
+<li><p>一致性</p>
+<p>事务的执行不能破坏数据库数据的完整性和一致性，一个事务在执行之前和执行之后，数据库都必须处于一致性状态。</p>
+<p>如果数据库系统在运行过程中发生故障，有些事务尚未完成就被迫中断，这些未完成的事务对数据库所作的修改有一部分已写入物理数据库，这是数据库就处于一种不正确的状态，也就是不一致的状态</p>
+</li>
+<li><p>隔离性</p>
+<p>事务的隔离性是指在并发环境中，并发的事务时相互隔离的，一个事务的执行不能不被其他事务干扰。不同的事务并发操作相同的数据时，每个事务都有各自完成的数据空间，即一个事务内部的操作及使用的数据对其他并发事务时隔离的，并发执行的各个事务之间不能相互干扰。</p>
+<p>在标准SQL规范中，定义了4个事务隔离级别，不同的隔离级别对事务的处理不同，分别是：未授权读取，授权读取，可重复读取和串行化</p>
+<ul>
+<li>Read Uncommitted：最低的隔离级别，什么都不需要做，一个事务可以读到另一个事务未提交的结果。所有的并发事务问题都会发生。</li>
+<li>Read Committed：只有在事务提交后，其更新结果才会被其他事务看见。可以解决脏读问题。</li>
+<li>Repeated Read：在一个事务中，对于同一份数据的读取结果总是相同的，无论是否有其他事务对这份数据进行操作，以及这个事务是否提交。可以解决脏读、不可重复读。</li>
+<li>Serialization：事务串行化执行，隔离级别最高，牺牲了系统的并发性。可以解决并发事务的所有问题。<br>通常，在工程实践中，为了性能的考虑会对隔离性进行折中。</li>
+</ul>
+</li>
+<li><p>持久性</p>
+<p>一旦事务提交，那么它对数据库中的对应数据的状态的变更就会永久保存到数据库中。–即使发生系统崩溃或机器宕机等故障，只要数据库能够重新启动，那么一定能够将其恢复到事务成功结束的状态</p>
+</li>
+</ul>
+<h6 id="2-配置事务管理器"><a href="#2-配置事务管理器" class="headerlink" title="2.配置事务管理器"></a>2.配置事务管理器</h6><p>一个使用 MyBatis-Spring 的其中一个主要原因是它允许 MyBatis 参与到 Spring 的事务管理中。而不是给 MyBatis 创建一个新的专用事务管理器，MyBatis-Spring 借助了 Spring 中的 <code>DataSourceTransactionManager</code> 来实现事务管理。</p>
+<p>在spring配置文件中添加如下代码</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">http://www.springframework.org/schema/tx</span><br><span class="line">http://www.springframework.org/schema/tx/spring-tx.xsd</span><br></pre></td></tr></table></figure>
+
+
+
+<p>要开启 Spring 的事务处理功能，在 Spring 的配置文件中创建一个 <code>DataSourceTransactionManager</code> 对象：</p>
+<p>传入的 <code>DataSource</code> 可以是任何能够与 Spring 兼容的 JDBC <code>DataSource</code>。包括连接池和通过 JNDI 查找获得的 <code>DataSource</code>。</p>
+<p>注意：为事务管理器指定的 <code>DataSource</code> <strong>必须</strong>和用来创建 <code>SqlSessionFactoryBean</code> 的是同一个数据源，否则事务管理器就无法工作了。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--    一个事务管理器对象--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;transactionManager&quot;</span> <span class="attr">class</span>=<span class="string">&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">&quot;dataSource&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用事务管理器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--    使用事务管理器--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tx:advice</span> <span class="attr">id</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">transaction-manager</span>=<span class="string">&quot;transactionManager&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">tx:method</span> <span class="attr">name</span>=<span class="string">&quot;*&quot;</span> <span class="attr">propagation</span>=<span class="string">&quot;REQUIRED&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">tx:attributes</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tx:advice</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在attributes标签下设置事务属性, method标签设置方法和其他属性, 如传播特性</p>
+<p>七中传播特性</p>
+<table>
+<thead>
+<tr>
+<th><strong>REQUIRED</strong></th>
+<th>支持当前事务，如果不存在 就新建一个(默认)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>SUPPORTS</strong></td>
+<td>支持当前事务，如果不存在，就不使用事务</td>
+</tr>
+<tr>
+<td><strong>MANDATORY</strong></td>
+<td>支持当前事务，如果不存在，抛出异常</td>
+</tr>
+<tr>
+<td><strong>REQUIRES_NEW</strong></td>
+<td>如果有事务存在，挂起当前事务，创建一个新的事务</td>
+</tr>
+<tr>
+<td><strong>NOT_SUPPORTED</strong></td>
+<td>以非事务方式运行，如果有事务存在，挂起当前事务</td>
+</tr>
+<tr>
+<td><strong>NEVER</strong></td>
+<td>以非事务方式运行，如果有事务存在，抛出异常</td>
+</tr>
+<tr>
+<td><strong>NESTED</strong></td>
+<td>如果当前事务存在，则嵌套事务执行, 如果不存在. 创建一个新的事务</td>
+</tr>
+</tbody></table>
+<p>aop横切</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">&quot;txPointcut&quot;</span> <span class="attr">expression</span>=<span class="string">&quot;execution(* com.ml.tx.*.*(..))&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:advisor</span> <span class="attr">advice-ref</span>=<span class="string">&quot;txAdvice&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;txPointcut&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>spring</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
