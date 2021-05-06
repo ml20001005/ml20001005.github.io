@@ -1515,11 +1515,11 @@
   </entry>
   <entry>
     <title>SpringMVC之restfull风格</title>
-    <url>/2021/05/06/SpringMVC%E4%B9%8Brestfull%E9%A3%8E%E6%A0%BC/</url>
+    <url>/2021/05/06/SpringMVC%E4%B9%8Brestful%E9%A3%8E%E6%A0%BC/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210506231432.jpg"></p>
-<h1 id="SpringMVC之restfull风格"><a href="#SpringMVC之restfull风格" class="headerlink" title="SpringMVC之restfull风格"></a>SpringMVC之restfull风格</h1><blockquote>
+<h1 id="SpringMVC之restful风格"><a href="#SpringMVC之restful风格" class="headerlink" title="SpringMVC之restful风格"></a>SpringMVC之restful风格</h1><blockquote>
 <ol>
-<li>restfull风格使请求地址栏中不再显示参数名, 只显示参数值, 提高安全性</li>
+<li>restful风格使请求地址栏中不再显示参数名, 只显示参数值, 提高安全性</li>
 <li>请求路径中的参数使用 <code>&#123;key&#125;</code> 表示, key表示参数名</li>
 <li>使用<code>@PathVariable</code>注解绑定请求参数与方法参数</li>
 </ol>
