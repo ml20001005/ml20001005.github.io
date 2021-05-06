@@ -1513,4 +1513,26 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringMVC之restfull风格</title>
+    <url>/2021/05/06/SpringMVC%E4%B9%8Brestfull%E9%A3%8E%E6%A0%BC/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210506231432.jpg"></p>
+<h1 id="SpringMVC之restfull风格"><a href="#SpringMVC之restfull风格" class="headerlink" title="SpringMVC之restfull风格"></a>SpringMVC之restfull风格</h1><blockquote>
+<ol>
+<li>restfull风格使请求地址栏中不再显示参数名, 只显示参数值, 提高安全性</li>
+<li>请求路径中的参数使用 <code>&#123;key&#125;</code> 表示, key表示参数名</li>
+<li>使用<code>@PathVariable</code>注解绑定请求参数与方法参数</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/rest/&#123;num1&#125;/&#123;num2&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">(<span class="meta">@PathVariable(&quot;num2&quot;)</span> <span class="keyword">int</span> a, <span class="meta">@PathVariable(&quot;num1&quot;)</span> <span class="keyword">int</span> b, Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;ans&quot;</span>,a + b);</span><br><span class="line">    model.addAttribute(<span class="string">&quot;a&quot;</span>,a);</span><br><span class="line">    model.addAttribute(<span class="string">&quot;b&quot;</span>,b);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中请求路径中包含两个参数, num1 和 num2, 使用<code>@PathVariable</code>注解将num1与方法参数b绑定, num2与方法参数a绑定</p>
+]]></content>
+      <categories>
+        <category>spring_mvc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>

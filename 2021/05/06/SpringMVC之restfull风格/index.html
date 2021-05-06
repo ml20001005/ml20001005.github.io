@@ -5,12 +5,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ml</title>
+    <title>SpringMVC之restfull风格 - ml</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="Fechin,"> 
-    <meta name="description" content="����˺���,"> 
+    <meta name="description" content="����˺���,
+SpringMVC之restfull风格
+
+restfull风格使请求地址栏中不再显示参数名, 只显示参数值, 提高安全性
+请求路径中的参数使用 &amp;#123;key&amp;#125; 表示, key表示,"> 
     <meta name="author" content="coding"> 
     <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -33,27 +37,85 @@
 <body class="loading">
     <span id="config-title" style="display:none">ml</span>
     <div id="loader"></div>
-    <div id="single" class="page">
-    <div id="top">
-        <a class="iconfont icon-left image-icon" href="javascript:history.back()"></a>
-    </div>
-    <div class="section">
-        <div class="article">
-            <div class="main">
-                <div class="content">
-                
-                    <div class="set">
-  <h2>分类</h2>
-  <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/springboot/">springboot</a><span class="category-list-count">17</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mybatis/">mybatis</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring-mvc/">spring_mvc</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java-se/">java_se</a><span class="category-list-count">1</span></li></ul>
-</div>
-
-                
-                </div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SpringMVC之restfull风格</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
             </div>
+            <div id="qr"></div>
         </div>
     </div>
+    <div class="scrollbar"></div>
 </div>
 
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">SpringMVC之restfull风格</h1>
+        <div class="stuff">
+            <span>五月 06, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210506231432.jpg"></p>
+<h1 id="SpringMVC之restfull风格"><a href="#SpringMVC之restfull风格" class="headerlink" title="SpringMVC之restfull风格"></a>SpringMVC之restfull风格</h1><blockquote>
+<ol>
+<li>restfull风格使请求地址栏中不再显示参数名, 只显示参数值, 提高安全性</li>
+<li>请求路径中的参数使用 <code>&#123;key&#125;</code> 表示, key表示参数名</li>
+<li>使用<code>@PathVariable</code>注解绑定请求参数与方法参数</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/rest/&#123;num1&#125;/&#123;num2&#125;&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">(<span class="meta">@PathVariable(&quot;num2&quot;)</span> <span class="keyword">int</span> a, <span class="meta">@PathVariable(&quot;num1&quot;)</span> <span class="keyword">int</span> b, Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;ans&quot;</span>,a + b);</span><br><span class="line">    model.addAttribute(<span class="string">&quot;a&quot;</span>,a);</span><br><span class="line">    model.addAttribute(<span class="string">&quot;b&quot;</span>,b);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中请求路径中包含两个参数, num1 和 num2, 使用<code>@PathVariable</code>注解将num1与方法参数b绑定, num2与方法参数a绑定</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
 </body>
 
 
