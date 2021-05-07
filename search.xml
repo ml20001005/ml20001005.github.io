@@ -1535,4 +1535,42 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringMVC之转发和重定向</title>
+    <url>/2021/05/07/SpringMVC%E4%B9%8B%E8%BD%AC%E5%8F%91%E5%92%8C%E9%87%8D%E5%AE%9A%E5%90%91/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210508003542.jpg"></p>
+<h1 id="SpringMVC之转发和重定向"><a href="#SpringMVC之转发和重定向" class="headerlink" title="SpringMVC之转发和重定向"></a>SpringMVC之转发和重定向</h1><h6 id="1-转发"><a href="#1-转发" class="headerlink" title="1.转发"></a>1.转发</h6><blockquote>
+<p>服务器端的行为, 请求地址不发生改变, 由服务器向浏览器转发页面, 发送一次请求</p>
+</blockquote>
+<ul>
+<li><p>方式一 : 在没有配置视图解析器时, 在返回值的前面加 <code>/</code> 后面跟具体的jsp页面路径</p>
+<p>注意 : 如果使用此方式时配置了视图解析器, 那么返回值的前面和后面将会被添加多余的前缀和后缀, 导致404错误</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/fr&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fr</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;这是转发&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;/WEB-INF/jsp/fr.jsp&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二 : 使用 <code>forward</code>, 此时无论是否配置了视图解析器都可以实现转发功能,  <code>forward:</code> 后跟具体的jsp页面路径</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/fr&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fr</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;这是转发&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;forward:/WEB-INF/jsp/fr.jsp&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="2-重定向-redirect"><a href="#2-重定向-redirect" class="headerlink" title="2.重定向 redirect"></a>2.重定向 <code>redirect</code></h6><blockquote>
+<p>浏览器端的行为, 请求地址发生改变, 由服务器告知浏览器该发送什么请求, 发送请求大于一次</p>
+</blockquote>
+<ul>
+<li><p>重定向到web目录下的jsp页面</p>
+<p>注意 : web目录下的jsp页面可以直接访问, 也就是可以直接使用web目录下的jsp页面名作为请求发送, 但是web目录下子目录的内容不可以直接访问, 否则404错误</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="meta">@GetMapping(&quot;/fr2&quot;)</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">fr2</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">      model.addAttribute(<span class="string">&quot;msg2&quot;</span>,<span class="string">&quot;这是重定向&quot;</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;redirect:/index.jsp&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>浏览器发送 fr2 请求, 服务器告诉浏览器该发送 index.jsp 请求, 浏览器再次发送 index.jsp 请求, 最后得到 web 目录下的 index.jsp 页面</p>
+</li>
+<li><p>重定向到别的请求</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/re&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">re</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;xxx&quot;</span>,<span class="string">&quot;这是重定向后的页面&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;fr2&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping(&quot;/fr2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">fr2</span><span class="params">(Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;msg2&quot;</span>,<span class="string">&quot;这是重定向&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;redirect:/re&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>浏览器发送 fr2 请求, 服务器告诉浏览器该发送 re 请求, 浏览器再次发送 re 请求, 方法返回 fr2 字符串, 经视图解析器处理, 最后得到 fr2.jsp 页面</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>spring_mvc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
