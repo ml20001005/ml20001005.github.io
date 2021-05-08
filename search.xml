@@ -1573,4 +1573,67 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringMVC中文乱码问题</title>
+    <url>/2021/05/08/SpringMVC%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210508154009.jpg"></p>
+<h1 id="SpringMVC中文乱码问题"><a href="#SpringMVC中文乱码问题" class="headerlink" title="SpringMVC中文乱码问题"></a>SpringMVC中文乱码问题</h1><blockquote>
+<p>在学习springMVC时, 使用表单提交数据若存在中文字符, 我们通过获取请求的参数值发现得到的是乱码, 将得到的参数值回显到浏览器也是乱码</p>
+</blockquote>
+<h6 id="解决方法一"><a href="#解决方法一" class="headerlink" title="解决方法一"></a>解决方法一</h6><p>实现 <code>Filter</code> 接口, Filter 是 javax.servlet 包下的一个过滤器接口, 可以通过实现这个接口设置字符集编码</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EcondingFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        servletRequest.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        servletResponse.setContentType(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">        filterChain.doFilter(servletRequest,servletResponse);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置过滤器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>com.ml.filter.EcondingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="解决方法二"><a href="#解决方法二" class="headerlink" title="解决方法二"></a>解决方法二</h6><p>使用系统已经封装好的字符编码过滤器, <code>CharacterEncodingFilter</code> , CharacterEncodingFilter也是Filter 的子类, 直接在web.xml中配置即可, 配置时需要指定想要设置的编码</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>注意 : 无论配置什么过滤器 <code>url-pattern</code> 都要设置为 <code>/*</code> , 如果使用 / 那么过滤器将没有效果</p>
+]]></content>
+      <categories>
+        <category>spring_mvc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC接收请求参数及数据回显</title>
+    <url>/2021/05/08/SpringMVC%E6%8E%A5%E6%94%B6%E8%AF%B7%E6%B1%82%E5%8F%82%E6%95%B0%E5%8F%8A%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210508141806.jpg"></p>
+<h1 id="SpringMVC接收请求参数及数据回显"><a href="#SpringMVC接收请求参数及数据回显" class="headerlink" title="SpringMVC接收请求参数及数据回显"></a>SpringMVC接收请求参数及数据回显</h1><h6 id="1-接收请求参数"><a href="#1-接收请求参数" class="headerlink" title="1.接收请求参数"></a>1.接收请求参数</h6><ul>
+<li><p>接收前端用户传递的参数, 判断参数的名字, 假设名字直接在方法上, 可以直接使用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para</span><span class="params">(Integer id, String name)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;id: &quot;</span> + id);</span><br><span class="line">    System.out.println(<span class="string">&quot;name: &quot;</span> + name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>@RequestParam</code>注解 : 可以使用@RequestParam注解将前端传递的参数与方法参数绑定, 若二者名字不同, 需要在注解中指定前端中的哪个参数与方法参数绑定, 使用了@RequestParam注解修饰的方法参数前端必须传递对应的参数, 否则将会报错</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para</span><span class="params">(<span class="meta">@RequestParam(&quot;idNum&quot;)</span> Integer id, String name)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;id: &quot;</span> + id);</span><br><span class="line">    System.out.println(<span class="string">&quot;name: &quot;</span> + name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>假设传递的是一个对象, 就会匹配对象的字段名, 匹配上了就赋值, 匹配不上就为 null</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para2</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="2-数据回显"><a href="#2-数据回显" class="headerlink" title="2.数据回显"></a>2.数据回显</h6><ul>
+<li><p>Model</p>
+<p>只有几个方法, 只适用于存储数据, 简化了新手对Model对象的操作和理解</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para2</span><span class="params">(User user, Model model)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;user&quot;</span>,user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ModelMap</p>
+<p>继承了LinkedHashMap, 除了自身的方法, 同时拥有LinkedHashMap的方法和特性</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para2</span><span class="params">(User user, ModelMap modelMap)</span></span>&#123;</span><br><span class="line">    modelMap.addAttribute(<span class="string">&quot;user&quot;</span>,user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>ModelAndView</p>
+<p>可以在存储数据的同时, 设置返回的逻辑视图, 进行控制展示层的跳转</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(&quot;/para2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">para2</span><span class="params">(User user, ModelAndView modelAndView)</span></span>&#123;</span><br><span class="line">    modelAndView.addObject(<span class="string">&quot;user&quot;</span>,user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;para&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>spring_mvc</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
