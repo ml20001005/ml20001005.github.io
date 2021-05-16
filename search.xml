@@ -1818,4 +1818,252 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>网页基本标签</title>
+    <url>/2021/05/16/%E7%BD%91%E9%A1%B5%E5%9F%BA%E6%9C%AC%E6%A0%87%E7%AD%BE/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210516125829.png"></p>
+<h1 id="网页基本标签"><a href="#网页基本标签" class="headerlink" title="网页基本标签"></a>网页基本标签</h1><h6 id="1-标题标签-header1-header6"><a href="#1-标题标签-header1-header6" class="headerlink" title="1.标题标签 (header1 ~ header6)"></a>1.标题标签 (header1 ~ header6)</h6><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span>&gt;</span><span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h4</span>&gt;</span><span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h5</span>&gt;</span><span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h6</span>&gt;</span><span class="tag">&lt;/<span class="name">h6</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-段落标签-paragraph"><a href="#2-段落标签-paragraph" class="headerlink" title="2.段落标签 (paragraph)"></a>2.段落标签 (paragraph)</h6><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3-换行标签-break"><a href="#3-换行标签-break" class="headerlink" title="3.换行标签 (break)"></a>3.换行标签 (break)</h6><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4-水平线标签-horizontal"><a href="#4-水平线标签-horizontal" class="headerlink" title="4.水平线标签 (horizontal)"></a>4.水平线标签 (horizontal)</h6><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="5-字体样式标签"><a href="#5-字体样式标签" class="headerlink" title="5.字体样式标签"></a>5.字体样式标签</h6><ul>
+<li>加粗 : <code>strong</code> </li>
+<li>斜体 : <code>em</code> (emphasis)</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">em</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="6-注释和特殊符号"><a href="#6-注释和特殊符号" class="headerlink" title="6.注释和特殊符号"></a>6.注释和特殊符号</h6><ul>
+<li><p>注释 : <!-- --></p>
+</li>
+<li><p>空格 : <code>&amp;nbsp;</code> (non breaking space)</p>
+</li>
+<li><p>大于 : <code>&amp;gt;</code> (greater than)</p>
+</li>
+<li><p>小于 : <code>&amp;lt;</code> (less than)</p>
+</li>
+<li><p>版权 : <code>&amp;copy;</code> (copyright)</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--注释--&gt;</span></span><br><span class="line"><span class="symbol">&amp;nbsp;</span></span><br><span class="line"><span class="symbol">&amp;gt;</span></span><br><span class="line"><span class="symbol">&amp;lt;</span></span><br><span class="line"><span class="symbol">&amp;copy;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="7-图像标签"><a href="#7-图像标签" class="headerlink" title="7.图像标签"></a>7.图像标签</h6><p><code>src</code> : 图片路径</p>
+<p><code>alt</code> : 图片不显示时显示的文字信息</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>关于 ../ 和 ./ </p>
+<p>../ : 上一级目录, 父目录</p>
+<p>./ : 当前目录</p>
+</blockquote>
+<h6 id="8-超链接"><a href="#8-超链接" class="headerlink" title="8.超链接"></a>8.超链接</h6><p><code>href</code> : 链接地址</p>
+<p><code>target</code> : 链接窗口在哪里打开</p>
+<ul>
+<li>_blank : 在新窗口打开</li>
+<li>_self : 在当前窗口打开</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span> <span class="attr">target</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="9-锚点链接"><a href="#9-锚点链接" class="headerlink" title="9.锚点链接"></a>9.锚点链接</h6><p>使用<code>a</code>标签加<code>name</code>属性</p>
+<p><code>name</code> : 设置锚点名字</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">name</span>=<span class="string">&quot;top&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>1.使用链接跳转到指定锚点</p>
+<p><code>href</code> : 填写需要跳转到的锚点名字, #后跟锚点名字</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#top&quot;</span>&gt;</span>去顶部<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.使用链接跳转到指定页面的指定锚点</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;./index.html#bottom&quot;</span>&gt;</span>去index的底部<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="10-功能性链接"><a href="#10-功能性链接" class="headerlink" title="10.功能性链接"></a>10.功能性链接</h6><p>邮件链接</p>
+<p>在<code>href</code>属性中使用<code>mailto:</code>后跟具体邮箱</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;mailto:2053151689@qq.com&quot;</span>&gt;</span>email<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>QQ推广</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span> <span class="attr">href</span>=<span class="string">&quot;http://wpa.qq.com/msgrd?v=3&amp;uin=2053151689&amp;site=qq&amp;menu=yes&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">border</span>=<span class="string">&quot;0&quot;</span> <span class="attr">src</span>=<span class="string">&quot;http://wpa.qq.com/pa?p=2:2053151689:53&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;添加咨询&quot;</span> <span class="attr">title</span>=<span class="string">&quot;添加咨询&quot;</span>/&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="11关于块元素和行内元素"><a href="#11关于块元素和行内元素" class="headerlink" title="11关于块元素和行内元素"></a>11关于块元素和行内元素</h6><p>块元素 : 无论内容多少, 独占一行</p>
+<p>行内元素 : 由内容大小决定宽度多少, 左右都是行内元素的可以排在一行</p>
+<h6 id="12-列表"><a href="#12-列表" class="headerlink" title="12.列表"></a>12.列表</h6><p>1.有序列表</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>java<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>大数据<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ol</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.无序列表</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>java<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>大数据<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Python<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>3.自定义列表</p>
+<p><code>dl</code> : 标签</p>
+<p><code>dt</code> : 列表名</p>
+<p><code>dd</code> : 列表内容</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dt</span>&gt;</span>标题<span class="tag">&lt;/<span class="name">dt</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>内容1<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>内容2<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dd</span>&gt;</span>内容3<span class="tag">&lt;/<span class="name">dd</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dl</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="13-表格标签"><a href="#13-表格标签" class="headerlink" title="13.表格标签"></a>13.表格标签</h6><p><code>table</code> : 标签</p>
+<p><code>tr</code> : 行</p>
+<p><code>td</code> : 列</p>
+<ul>
+<li><code>colspan</code> : 跨列属性</li>
+<li><code>rowspan</code> : 跨行属性</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span> <span class="attr">border</span>=<span class="string">&quot;1px&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">colspan</span>=<span class="string">&quot;3&quot;</span>&gt;</span>java<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>python<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>c<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>c++<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>php<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>scala<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>=<span class="string">&quot;2&quot;</span>&gt;</span>c++<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>c<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>c#<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tr</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>rust<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">td</span>&gt;</span>go<span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">tr</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--    --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">table</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 效果   --&gt;</span></span><br><span class="line">--------------------------------------------------</span><br><span class="line">|					java						 |</span><br><span class="line">--------------------------------------------------</span><br><span class="line">|						|	  c	     |	c++	     |</span><br><span class="line">|		python			--------------------------</span><br><span class="line">|						|	  php	 |	scala	 |</span><br><span class="line">--------------------------------------------------</span><br><span class="line">|						|	  c		 |	c#		 |</span><br><span class="line">|		c++				--------------------------</span><br><span class="line">|						|	  rust	 |	go		 |</span><br><span class="line">--------------------------------------------------</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="14-媒体元素"><a href="#14-媒体元素" class="headerlink" title="14.媒体元素"></a>14.媒体元素</h6><p><code>src</code> : 文件路径</p>
+<p><code>controls</code> : 控件</p>
+<p><code>autoplay</code> : 自动播放</p>
+<p><code>loop</code> : 循环播放</p>
+<p>视频</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">&quot;./video/nice.mp4&quot;</span> <span class="attr">controls</span> <span class="attr">autoplay</span> <span class="attr">loop</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>音频</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">&quot;./audio/summer.mp3&quot;</span> <span class="attr">controls</span> <span class="attr">autoplay</span> <span class="attr">loop</span>&gt;</span><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="15-iframe内联框架"><a href="#15-iframe内联框架" class="headerlink" title="15.iframe内联框架"></a>15.iframe内联框架</h6><p>内联框架就是在一个网页中嵌入另一个网页</p>
+<p><code>src</code> : 默认内联框架中显示的网页</p>
+<p><code>frameborder</code> : 框架是否显示边框(1 或 0)</p>
+<p><code>width</code> : 设置框架宽度</p>
+<p><code>height</code> : 设置框架高度</p>
+<p><code>name</code> : 设置框架的名字, 可用于设置<code>a</code>标签的<code>target</code>属性, 使<code>a</code>标签跳转的网页在内联框架中显示</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&quot;https://www.baidu.com&quot;</span> <span class="attr">frameborder</span>=<span class="string">&quot;0&quot;</span> <span class="attr">width</span>=<span class="string">&quot;800px&quot;</span> <span class="attr">height</span>=<span class="string">&quot;600px&quot;</span> <span class="attr">name</span>=<span class="string">&quot;box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="16-表单"><a href="#16-表单" class="headerlink" title="16.表单"></a>16.表单</h6><p><code>action</code> : 表单数据提交到什么地方</p>
+<p><code>method</code> : 提交数据的方式</p>
+<ul>
+<li>get : 我们可以在提交的URL中看到我们提交的信息, 不安全, 但是高效</li>
+<li>post : 看不到我们提交的信息, 但是安全, 可以传输大文件</li>
+</ul>
+<p><code>input</code> : input标签</p>
+<p><code>type</code> : input标签根据标签属性type的值不同可以有不同的展现形式</p>
+<ul>
+<li>text : 文本类型输入框</li>
+<li>password : 密码类型输入框</li>
+<li>submit : 提交类型输入框</li>
+</ul>
+<p><code>name</code> : 每个input标签的标识</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;./index.html&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>用户名<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>密码<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;登录&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;注册&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="17-单选按钮"><a href="#17-单选按钮" class="headerlink" title="17.单选按钮"></a>17.单选按钮</h6><p>设置input标签的type属性为<code>radio</code></p>
+<p><code>checked</code> : 默认选中</p>
+<p>注意 : 单选按钮存在组的概念, 也就是多个type为radio的单选按钮他们的<code>name</code>属性值需要一样, 这样才能实现只能选一个, 不然可以选多个</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        男<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;boy&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span>&gt;</span></span><br><span class="line">        女<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;girl&quot;</span> <span class="attr">name</span>=<span class="string">&quot;gender&quot;</span> <span class="attr">checked</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="18-多选按钮"><a href="#18-多选按钮" class="headerlink" title="18.多选按钮"></a>18.多选按钮</h6><p><code>checked</code> : 默认选中</p>
+<p>设置input标签的type属性为<code>checkbox</code>, 同为一个按钮组的多选按钮需要设置<code>name</code>属性值一样</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">        敲代码<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;code&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span>&gt;</span></span><br><span class="line">        吃饭<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;food&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span>&gt;</span></span><br><span class="line">        睡觉<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;sleep&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span> <span class="attr">checked</span>&gt;</span></span><br><span class="line">        游戏<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;game&quot;</span> <span class="attr">name</span>=<span class="string">&quot;hobby&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="19-其他按钮"><a href="#19-其他按钮" class="headerlink" title="19.其他按钮"></a>19.其他按钮</h6><p>当input标签的<code>type</code>属性值为以下内容时</p>
+<ul>
+<li><code>button</code> : 普通按钮</li>
+<li><code>submit</code> : 提交按钮(提交表单数据)</li>
+<li><code>reset</code> : 重置按钮(重置表单数据)</li>
+<li><code>image</code> : 图片按钮(图片是一个按钮)</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;点击变长&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;reset&quot;</span> <span class="attr">value</span>=<span class="string">&quot;重置&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;image&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./images/gd.jpg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="20-下拉框"><a href="#20-下拉框" class="headerlink" title="20.下拉框"></a>20.下拉框</h6><p><code>name</code> : 设置下拉框的名字</p>
+<p><code>value</code> : 设置下拉框的子元素值</p>
+<p><code>selected</code> : 默认选择</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">&quot;国家&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;中国&quot;</span>&gt;</span>中国<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;俄罗斯&quot;</span>&gt;</span>俄罗斯<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;美国&quot;</span>&gt;</span>美国<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;瑞士&quot;</span> <span class="attr">selected</span>&gt;</span>瑞士<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="21-文本域"><a href="#21-文本域" class="headerlink" title="21.文本域"></a>21.文本域</h6><p><code>name</code> : 文本域的名字</p>
+<p><code>id</code> : 文本域的id</p>
+<p><code>cols</code> : 文本域的宽度(列的数量)</p>
+<p><code>rows</code> : 文本域的高度(行的数量)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;反馈&quot;</span> <span class="attr">id</span>=<span class="string">&quot;infor&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;80&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span>&gt;</span>反馈内容<span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="22-文件域"><a href="#22-文件域" class="headerlink" title="22.文件域"></a>22.文件域</h6><p>设置input标签的<code>type</code>属性值为<code>file</code>时, input标签将展现为文件上传按钮样式</p>
+<p><code>name</code> : 设置上传文件的名字(这个不是文件的真实名字, 是我们自己定义的)</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;上传&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="23-input标签简单验证"><a href="#23-input标签简单验证" class="headerlink" title="23.input标签简单验证"></a>23.input标签简单验证</h6><ul>
+<li><p>邮箱地址验证</p>
+<p>设置input标签的<code>type</code>属性值为<code>email</code>时, 当点击提交按钮, 将会自动验证输入框中的内容是否符合邮箱地址</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;email&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>URL验证</p>
+<p>设置input标签的<code>type</code>属性值为<code>url</code>时, 当点击提交按钮, 将会自动验证输入框中的内容是否符合url</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;url&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>数字</p>
+<p>设置input标签的<code>type</code>属性值为<code>number</code>时, 输入框中只能输入数字, 不能输入其他内容</p>
+<p><code>name</code> : 当前input标签的名字</p>
+<p><code>value</code> : 默认值</p>
+<p><code>max</code> : 最大值</p>
+<p><code>min</code> : 最小值</p>
+<p><code>step</code> : 步长</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;number&quot;</span> <span class="attr">name</span>=<span class="string">&quot;num&quot;</span> <span class="attr">value</span>=<span class="string">&quot;1&quot;</span> <span class="attr">max</span>=<span class="string">&quot;100&quot;</span> <span class="attr">min</span>=<span class="string">&quot;0&quot;</span> <span class="attr">step</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h6 id="24-滑块"><a href="#24-滑块" class="headerlink" title="24.滑块"></a>24.滑块</h6><p>设置input标签的<code>type</code>属性值为<code>range</code>时, input标签展现形式为滑块</p>
+<p><code>name</code> : 当前input标签的名字</p>
+<p><code>value</code> : 默认值</p>
+<p><code>max</code> : 最大值</p>
+<p><code>min</code> : 最小值</p>
+<p><code>step</code> : 步长</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;range&quot;</span> <span class="attr">name</span>=<span class="string">&quot;voice&quot;</span> <span class="attr">value</span>=<span class="string">&quot;20&quot;</span> <span class="attr">max</span>=<span class="string">&quot;100&quot;</span> <span class="attr">min</span>=<span class="string">&quot;0&quot;</span> <span class="attr">step</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="25-搜索框"><a href="#25-搜索框" class="headerlink" title="25.搜索框"></a>25.搜索框</h6><p>设置input标签的<code>type</code>属性值为<code>search</code>时, input标签展现形式为搜索框</p>
+<p><code>name</code> : 当前input标签的名字</p>
+<p><code>placeholder</code> : 输入框底部显示的内容</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;search&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入搜索内容&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="26-input标签的其他属性"><a href="#26-input标签的其他属性" class="headerlink" title="26.input标签的其他属性"></a>26.input标签的其他属性</h6><ul>
+<li>hidden : 隐藏域</li>
+<li>readonly : 只读</li>
+<li>disable : 禁用</li>
+<li>required : 内容不能为空</li>
+</ul>
+<h6 id="27-label标签增强鼠标可用性"><a href="#27-label标签增强鼠标可用性" class="headerlink" title="27.label标签增强鼠标可用性"></a>27.label标签增强鼠标可用性</h6><p><code>for</code> : label标签属性, 属性值为input标签的id值, 当点击label标签时, 将自动定位到for指定id的input标签</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;search1&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入搜索内容&quot;</span> <span class="attr">id</span>=<span class="string">&quot;s1&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;search2&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入搜索内容&quot;</span> <span class="attr">id</span>=<span class="string">&quot;s2&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;search&quot;</span> <span class="attr">name</span>=<span class="string">&quot;search3&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入搜索内容&quot;</span> <span class="attr">id</span>=<span class="string">&quot;s3&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;s2&quot;</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="28-正则表达式验证"><a href="#28-正则表达式验证" class="headerlink" title="28.正则表达式验证"></a>28.正则表达式验证</h6><p>当要自定义验证时, 可以使用<code>pattern</code>属性, 属性值为一个正则表达式, 用于处理自定义验证</p>
+<p>常用正则表达式 : <a href="https://www.jb51.net/tools/regex.htm">https://www.jb51.net/tools/regex.htm</a></p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">pattern</span>=<span class="string">&quot;^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入邮箱地址&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <tags>
+        <tag>html</tag>
+      </tags>
+  </entry>
 </search>
