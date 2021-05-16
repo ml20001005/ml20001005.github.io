@@ -2062,8 +2062,11 @@
 <h6 id="28-正则表达式验证"><a href="#28-正则表达式验证" class="headerlink" title="28.正则表达式验证"></a>28.正则表达式验证</h6><p>当要自定义验证时, 可以使用<code>pattern</code>属性, 属性值为一个正则表达式, 用于处理自定义验证</p>
 <p>常用正则表达式 : <a href="https://www.jb51.net/tools/regex.htm">https://www.jb51.net/tools/regex.htm</a></p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">pattern</span>=<span class="string">&quot;^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入邮箱地址&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>html</category>
+      </categories>
       <tags>
-        <tag>html</tag>
+        <tag>笔记</tag>
       </tags>
   </entry>
 </search>
