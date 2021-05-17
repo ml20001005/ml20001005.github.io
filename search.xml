@@ -2124,12 +2124,21 @@
     <title>HTML之文本样式</title>
     <url>/2021/05/17/HTML%E4%B9%8B%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210517181321.jpg"></p>
-<h1 id="HTML之文本样式"><a href="#HTML之文本样式" class="headerlink" title="HTML之文本样式"></a>HTML之文本样式</h1><h6 id="1-文本颜色"><a href="#1-文本颜色" class="headerlink" title="1.文本颜色"></a>1.文本颜色</h6><ol>
-<li><p>```css<br>color: red;</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. &#96;&#96;&#96;css</span><br><span class="line">   color: rgb(255,0,0); &#x2F;*rgb的三个属性值分别是: 红 绿 蓝, 数值范围是: 0 ~ 255*&#x2F;</span><br></pre></td></tr></table></figure></li>
-<li><p>```css<br>color: rgba(255,0,0,0.5); /*rgba的四个属性值分别是: 红 绿 蓝 透明度, rgb数值范围是: 0 ~ 255, a的数值范围是: 0 ~ 1 */</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">###### 2.文本对齐方式</span><br><span class="line"></span><br><span class="line">&gt; 左右对齐</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;css</span><br><span class="line">text-align: center;</span><br></pre></td></tr></table></figure></li>
-</ol>
+<h1 id="HTML之文本样式"><a href="#HTML之文本样式" class="headerlink" title="HTML之文本样式"></a>HTML之文本样式</h1><h6 id="1-文本颜色"><a href="#1-文本颜色" class="headerlink" title="1.文本颜色"></a>1.文本颜色</h6><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: red;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); <span class="comment">/*rgb的三个属性值分别是: 红 绿 蓝, 数值范围是: 0 ~ 255*/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>); <span class="comment">/*rgba的四个属性值分别是: 红 绿 蓝 透明度, rgb数值范围是: 0 ~ 255, a的数值范围是: 0 ~ 1 */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-文本对齐方式"><a href="#2-文本对齐方式" class="headerlink" title="2.文本对齐方式"></a>2.文本对齐方式</h6><blockquote>
+<p>左右对齐</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">text-align</span>: center;</span><br></pre></td></tr></table></figure>
+
+
+
 <h6 id="3-首行缩进"><a href="#3-首行缩进" class="headerlink" title="3.首行缩进"></a>3.首行缩进</h6><blockquote>
 <p>2em代表两个汉字高度, 汉字为方块字, 所以高度等于宽度, 也就是缩进两个字的宽度</p>
 </blockquote>
