@@ -2124,11 +2124,15 @@
     <title>HTML之文本样式</title>
     <url>/2021/05/17/HTML%E4%B9%8B%E6%96%87%E6%9C%AC%E6%A0%B7%E5%BC%8F/</url>
     <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210517181321.jpg"></p>
-<h1 id="HTML之文本样式"><a href="#HTML之文本样式" class="headerlink" title="HTML之文本样式"></a>HTML之文本样式</h1><h6 id="1-文本颜色"><a href="#1-文本颜色" class="headerlink" title="1.文本颜色"></a>1.文本颜色</h6><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: red;</span><br></pre></td></tr></table></figure>
+<h1 id="HTML之文本样式"><a href="#HTML之文本样式" class="headerlink" title="HTML之文本样式"></a>HTML之文本样式</h1><h6 id="1-文本颜色"><a href="#1-文本颜色" class="headerlink" title="1.文本颜色"></a>1.文本颜色</h6><blockquote>
+<p>rgb的三个属性值分别是: 红 绿 蓝, 数值范围是: 0 ~ 255</p>
+<p>rgba的四个属性值分别是: 红 绿 蓝 透明度, rgb数值范围是: 0 ~ 255, a的数值范围是: 0 ~ 1</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: red;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); <span class="comment">/*rgb的三个属性值分别是: 红 绿 蓝, 数值范围是: 0 ~ 255*/</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>); </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>); <span class="comment">/*rgba的四个属性值分别是: 红 绿 蓝 透明度, rgb数值范围是: 0 ~ 255, a的数值范围是: 0 ~ 1 */</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="built_in">rgba</span>(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>); </span><br></pre></td></tr></table></figure>
 
 
 
