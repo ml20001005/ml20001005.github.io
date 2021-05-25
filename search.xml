@@ -2347,4 +2347,86 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之ConfigurationProperties和Value注解的区别</title>
+    <url>/2021/05/25/SpringBoot%E4%B9%8BConfigurationProperties%E5%92%8CValue%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210525203928.png"></p>
+<h1 id="SpringBoot之ConfigurationProperties和Value注解的区别"><a href="#SpringBoot之ConfigurationProperties和Value注解的区别" class="headerlink" title="SpringBoot之ConfigurationProperties和Value注解的区别"></a>SpringBoot之ConfigurationProperties和Value注解的区别</h1><h6 id="1-ConfigurationProperties和-Value获取值的比较"><a href="#1-ConfigurationProperties和-Value获取值的比较" class="headerlink" title="1.@ConfigurationProperties和@Value获取值的比较"></a>1.@ConfigurationProperties和@Value获取值的比较</h6><table>
+<thead>
+<tr>
+<th></th>
+<th>@ConfigurationProperties</th>
+<th>@Value</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>功能</td>
+<td>批量注入配置文件中的属性</td>
+<td>一个个指定</td>
+</tr>
+<tr>
+<td>松散绑定(松散语法)</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>SpEL</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>JSR303</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>复杂类型封装</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody></table>
+<p>无论使用<code>@ConfigurationProperties</code>还是<code>@Value</code>都可以获取到值</p>
+<p>如果说, 我们只是在某个业务逻辑中需要获取一下配置文件中某项的值, 使用<code>@Value</code></p>
+<p>如果说, 我们专门编写了一个JavaBean来和配置文件进行映射, 我们就直接使用<code>@ConfigurationProperties</code></p>
+<h6 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h6><ul>
+<li><p><strong>松散绑定(松散语法)</strong></p>
+<p>例如如下Javabean属性</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> String lastName;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>@ConfigurationProperties</code>注解时配置文件中与之绑定的属性名可以为 lastName 或 last_name 或 last-name 或 LASTNAME 或 LAST_NAME 或 LAST-NAME, 但是使用<code>@Value</code>时必须明确指定配置文件中与之绑定的属性名</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;$&#123;person.last-name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String lastName;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>SpEL</strong></p>
+<p><code>@Value</code>给Javabean属性绑定属性值时可以使用SpEL语法, 但是<code>@ConfigurationProperties</code>不能使用</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;#&#123;10*12&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> Integer id;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>JSR303</strong></p>
+<p>使用<code>@ConfigurationProperties</code>可以使用JSR303数据校验, 但是<code>@Value</code>不可以</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Validated</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Email</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>关于使用JSR303数据校验</p>
+<ol>
+<li><p>导入spring-boot-starter-validation依赖</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>在需要使用JSR303数据校验的类上添加<code>@Validated</code>注解</p>
+</li>
+<li><p>在需要JSR303数据校验的地方添加JSR303数据校验注解</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>复杂类型封装</strong></p>
+<p>使用<code>@ConfigurationProperties</code>时, 在配置文件中配置的任何类型元数据均可以绑定到Javabean属性, 但是<code>@Value</code>只能绑定到配置文件中的基本数据类型数据</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Value(&quot;男&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String gender;</span><br><span class="line"><span class="meta">@Value(&quot;$&#123;person.last-name&#125;&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String lastName;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">person.id</span>=<span class="string">20</span></span><br><span class="line"><span class="meta">person.name</span>=<span class="string">ml</span></span><br><span class="line"><span class="meta">person.gender</span>=<span class="string">男</span></span><br><span class="line"><span class="meta">person.age</span>=<span class="string">20</span></span><br><span class="line"><span class="meta">person.boss</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">person.birth</span>=<span class="string">2000/10/05</span></span><br><span class="line"><span class="meta">person.pets</span>=<span class="string">dog,cat,pig</span></span><br><span class="line"><span class="meta">person.map.1</span>=<span class="string">周一</span></span><br><span class="line"><span class="meta">person.map.2</span>=<span class="string">周二</span></span><br><span class="line"><span class="meta">person.map.3</span>=<span class="string">周三</span></span><br><span class="line"><span class="meta">person.dog.name</span>=<span class="string">狗子</span></span><br><span class="line"><span class="meta">person.dog.gender</span>=<span class="string">大漂亮</span></span><br><span class="line"><span class="meta">person.dog.age</span>=<span class="string">2</span></span><br><span class="line"><span class="meta">person.LASTNAME</span>=<span class="string">哈哈哈哈</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
