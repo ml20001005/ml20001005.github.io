@@ -2293,4 +2293,58 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之yaml基础语法</title>
+    <url>/2021/05/25/SpringBoot%E4%B9%8Byaml%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210525185406.jpg"></p>
+<h1 id="SpringBoot之yaml基础语法"><a href="#SpringBoot之yaml基础语法" class="headerlink" title="SpringBoot之yaml基础语法"></a>SpringBoot之yaml基础语法</h1><h6 id="1-普通值-字符串-数字-布尔"><a href="#1-普通值-字符串-数字-布尔" class="headerlink" title="1.普通值(字符串, 数字, 布尔)"></a>1.普通值(字符串, 数字, 布尔)</h6><p>k : v 直接写</p>
+<p>字符串默认不用加双引号或单引号</p>
+<p>“” : 双引号, 不会转译字符串里面的特殊字符, 特殊字符会表达它本身的意思</p>
+<p>​        name : “zhangsan \n lisi”</p>
+<p>​        输出: zhangsan 换行 lisi</p>
+<p>‘’ : 单引号, 会转译字符串里面的特殊字符, 特殊字符会作为普通字符串表示</p>
+<p>​        name : “zhangsan \n lisi”</p>
+<p>​        输出: zhangsan \n lisi</p>
+<h6 id="2-对象"><a href="#2-对象" class="headerlink" title="2.对象"></a>2.对象</h6><p>k : v 书写方式</p>
+<p>在对象名的下一行书写对象的属性和属性值, 注意缩进</p>
+<p>注意冒号 : 后面会有一个空格</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">person:</span></span><br><span class="line">	<span class="attr">id:</span> <span class="number">1</span></span><br><span class="line">	<span class="attr">name:</span> <span class="string">张三</span></span><br><span class="line">	<span class="attr">gender:</span> <span class="string">男</span></span><br></pre></td></tr></table></figure>
+
+<p>行内写法</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">person:</span> &#123;<span class="attr">id:</span> <span class="number">1</span>,<span class="attr">name:</span> <span class="string">张三</span>,<span class="attr">gender:</span> <span class="string">男</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3-数组-list"><a href="#3-数组-list" class="headerlink" title="3.数组(list)"></a>3.数组(list)</h6><p>注意横杆 - 后面会有一个空格</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">pets:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">cat</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">dog</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">pig</span></span><br></pre></td></tr></table></figure>
+
+<p>行内写法</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">pets:</span> [<span class="string">cat</span>,<span class="string">dog</span>,<span class="string">pig</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4-map"><a href="#4-map" class="headerlink" title="4.map"></a>4.map</h6><p>k : v 键值对</p>
+<p>注意冒号 : 后面有一个空格</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Map&lt;String,String&gt; map</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">map:</span></span><br><span class="line">  <span class="attr">1:</span> <span class="string">周一</span></span><br><span class="line">  <span class="attr">2:</span> <span class="string">周二</span></span><br><span class="line">  <span class="attr">3:</span> <span class="string">周三</span></span><br></pre></td></tr></table></figure>
+
+<p>行内写法</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">map:</span> &#123;<span class="attr">1:</span> <span class="string">周一</span>,<span class="attr">2:</span> <span class="string">周二</span>,<span class="attr">3:</span> <span class="string">周三</span>&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="4-关于-ConfigurationProperties注解"><a href="#4-关于-ConfigurationProperties注解" class="headerlink" title="4.关于@ConfigurationProperties注解"></a>4.关于<code>@ConfigurationProperties</code>注解</h6><p>告诉SpringBoot将本类中的所有属性和配置文件中的相关配置进行绑定</p>
+<p>注意注解需要配置一个<code>prefix</code>属性, 指定需要绑定的配置文件中配置内容的前缀</p>
+<h6 id="5-关于配置文件处理器spring-boot-configuration-processor"><a href="#5-关于配置文件处理器spring-boot-configuration-processor" class="headerlink" title="5.关于配置文件处理器spring-boot-configuration-processor"></a>5.关于配置文件处理器<code>spring-boot-configuration-processor</code></h6><p>导入配置文件处理器, 当我们在配置文件中配置自己的元数据时, 就会有提示信息</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
