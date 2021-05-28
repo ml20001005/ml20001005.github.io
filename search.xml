@@ -2429,4 +2429,85 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之Profile多环境支持</title>
+    <url>/2021/05/28/SpringBoot%E4%B9%8BProfile%E5%A4%9A%E7%8E%AF%E5%A2%83%E6%94%AF%E6%8C%81/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210528174618.png"></p>
+<h1 id="SpringBoot之Profile多环境支持"><a href="#SpringBoot之Profile多环境支持" class="headerlink" title="SpringBoot之Profile多环境支持"></a>SpringBoot之Profile多环境支持</h1><h6 id="1-多profile文件"><a href="#1-多profile文件" class="headerlink" title="1.多profile文件"></a>1.多profile文件</h6><p>我们在主配置文件编写的时候, 文件名可以是<code>application-&#123;profile&#125;.properties/yaml</code></p>
+<p>默认使用<code>application.properties</code>或<code>application.yaml</code></p>
+<p>当我们为不同的生产环境编写了多个配置文件时, 可以通过在默认使用的配置文件中指定 <code>spring.profiles.active</code> 激活使用哪个配置文件</p>
+<p>properties</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">spring.profiles.active</span>=<span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+<p>yaml</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-yaml支持多文档块方式"><a href="#2-yaml支持多文档块方式" class="headerlink" title="2.yaml支持多文档块方式"></a>2.yaml支持多文档块方式</h6><p>在<code>yaml</code>格式的配置文件中, 我们可以使用 <code>---</code> 分割文档快, 在不同的文档块中写不同环境的配置</p>
+<p>在每一个文档块中通过 <code>spring.profiles</code> 指定该文档块用于什么生产环境</p>
+<p>在第一个文档块中 通过指定 <code>spring.profiles.active</code> 选择激活哪个文档块的配置, 如果不指定, 默认使用第一个文档块</p>
+<p>这个方式可以减少配置文件的数量, 他把所有配置都写在了一个配置文件中, 只是使用 <code>---</code> 进行了分割</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8087</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span></span><br><span class="line">    <span class="attr">active:</span> <span class="string">dev</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8088</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">dev</span></span><br><span class="line"></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8089</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">profiles:</span> <span class="string">prod</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3-激活profile方式"><a href="#3-激活profile方式" class="headerlink" title="3.激活profile方式"></a>3.激活profile方式</h6><p>​    1.在默认使用的配置文件中指定 <code>spring.profiles.active</code> </p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot之配置文件占位符</title>
+    <url>/2021/05/28/SpringBoot%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%8D%A0%E4%BD%8D%E7%AC%A6/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210528164652.jpg"></p>
+<h1 id="SpringBoot之配置文件占位符"><a href="#SpringBoot之配置文件占位符" class="headerlink" title="SpringBoot之配置文件占位符"></a>SpringBoot之配置文件占位符</h1><h6 id="1-随机数"><a href="#1-随机数" class="headerlink" title="1.随机数"></a>1.随机数</h6><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">$&#123;random.value&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.int&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.int(max)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.int(min,max)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.long&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.long(max)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.long(min,max)&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">$&#123;random.uuid&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-占位符获取前面配置的属性值-如果没有可以使用-指定默认值"><a href="#2-占位符获取前面配置的属性值-如果没有可以使用-指定默认值" class="headerlink" title="2.占位符获取前面配置的属性值, 如果没有可以使用:指定默认值"></a>2.占位符获取前面配置的属性值, 如果没有可以使用:指定默认值</h6><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">person.name=$&#123;random.uuid&#125;</span><br><span class="line">person.dog.name=$&#123;person.name&#125;的狗子</span><br><span class="line">person.LASTNAME=$&#123;person.hello:啦啦啦&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot之PropertySource注解ImportResource注解Bean注解</title>
+    <url>/2021/05/28/SpringBoot%E4%B9%8BPropertySource%E6%B3%A8%E8%A7%A3ImportResource%E6%B3%A8%E8%A7%A3Bean%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210528155605.jpg"></p>
+<h1 id="SpringBoot之PropertySource注解ImportResource注解Bean注解"><a href="#SpringBoot之PropertySource注解ImportResource注解Bean注解" class="headerlink" title="SpringBoot之PropertySource注解ImportResource注解Bean注解"></a>SpringBoot之PropertySource注解ImportResource注解Bean注解</h1><h6 id="1-PropertySource注解"><a href="#1-PropertySource注解" class="headerlink" title="1.PropertySource注解"></a>1.PropertySource注解</h6><p>当我们使用<code>ConfigurationProperties</code>注解时, 我们可以通过指定前缀, 将<code>application.yml</code>或<code>application.properties</code>中配置的属性注入到Java Bean中, 但是如果所有java bean的属性都写在主配置文件中, 主配置文件就会越来越大, 所以我们可以使用另一种方式, 给java bean一个单独的配置文件, 此时我们通过<code>PropertySource</code>注解将java bean与单独配置文件绑定, 同时结合<code>ConfigurationProperties</code>注解指定前缀, 达到java bean属性配置分离出主配置文件, 属性配置注入java bean的效果</p>
+<p>在<code>PropertySource</code>中需要指定<code>value</code>属性值, 这个属性指定配置文件的位置</p>
+<p>在<code>ConfigurationProperties</code>中指定配置文件中属性前缀<code>prefix</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@PropertySource(value = &#123;&quot;classpath:person.properties&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;person&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String gender;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> boss;</span><br><span class="line">    <span class="keyword">private</span> Date birth;</span><br><span class="line">    <span class="keyword">private</span> String[] pets;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,String&gt; map;</span><br><span class="line">    <span class="keyword">private</span> String lastName;</span><br><span class="line">    <span class="keyword">private</span> Dog dog;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="2-ImportResource注解"><a href="#2-ImportResource注解" class="headerlink" title="2.ImportResource注解"></a>2.ImportResource注解</h6><p>用于导入<code>spring</code>配置文件, 在<code>springboot</code>中<code>spring</code>的配置文件默认不会被读取, 需要通过<code>ImportResource</code>注解将<code>spring</code>的配置文件导入<code>springboot</code>的一个<code>配置类</code>, 这样<code>spring</code>配置文件中定义的<code>bean</code>才会存在于<code>IOC</code>容器中</p>
+<p>使用<code>Configuration</code>标明的类就是一个<code>springboot``配置类</code></p>
+<p>在<code>ImportResource</code>中指定<code>locations</code>的值, 代表<code>spring配置文件的位置</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ImportResource(locations = &#123;&quot;classpath:spring-beans.xml&quot;&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HelloService <span class="title">getHelloService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HelloService();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="3-Bean注解"><a href="#3-Bean注解" class="headerlink" title="3.Bean注解"></a>3.Bean注解</h6><p>使用<code>bean</code>注解给<code>IOC</code>容器添加组件</p>
+<p><code>Configuration</code>表明这个类是一个配置类, 也就相当于是一个<code>spring</code>配置文件</p>
+<p>使用<code>bean</code>修饰的方法, 他的<code>返回值</code>将会作为一个<code>组件</code>被注入<code>IOC</code>容器中, 同时组件的<code>id</code>就是<code>方法名</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HelloService <span class="title">getHelloService</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HelloService();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
