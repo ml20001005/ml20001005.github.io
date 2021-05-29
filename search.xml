@@ -2510,4 +2510,27 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之配置文件的加载位置</title>
+    <url>/2021/05/29/SpringBoot%E4%B9%8B%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E5%8A%A0%E8%BD%BD%E4%BD%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210529131017.png"></p>
+<h1 id="SpringBoot之配置文件的加载位置"><a href="#SpringBoot之配置文件的加载位置" class="headerlink" title="SpringBoot之配置文件的加载位置"></a>SpringBoot之配置文件的加载位置</h1><blockquote>
+<p>springboot启动会扫描以下位置的application.properties或者application.yaml文件作为springboot的默认配置文件</p>
+</blockquote>
+<ol>
+<li>file:./config/                项目目录下的config目录下</li>
+<li>file:./                        项目目录下</li>
+<li>classpath:/config/      类路径下的config目录下</li>
+<li>classpath:/                类路径下</li>
+</ol>
+<p>以上是按照<code>优先级从高到低</code>的顺序, 所有位置的文件都会被加载, <code>高优先级</code>配置的内容会<code>覆盖``低优先级</code>配置的内容, <code>互补配置</code></p>
+<p>项目打包后, 我们也可以通过在<code>命令行</code>中使用 <code>spring.config.location</code> 来改变默认配置的位置</p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
