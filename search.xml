@@ -2611,4 +2611,34 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之webjars和静态资源映射</title>
+    <url>/2021/05/31/SpringBoot%E4%B9%8Bwebjars%E5%92%8C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%98%A0%E5%B0%84/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210531234747.png"></p>
+<h1 id="SpringBoot之webjars和静态资源映射"><a href="#SpringBoot之webjars和静态资源映射" class="headerlink" title="SpringBoot之webjars和静态资源映射"></a>SpringBoot之webjars和静态资源映射</h1><h6 id="1-webjars"><a href="#1-webjars" class="headerlink" title="1.webjars"></a>1.webjars</h6><p>所有<code>/webjars/**</code>请求, 都去<code>classpath:/META-INF/resources/webjars/</code>下面寻找资源</p>
+<p><code>webjars</code>: 以jar包的方式引入资源</p>
+<blockquote>
+<p>webjars官网: <a href="https://www.webjars.org/">https://www.webjars.org/</a></p>
+</blockquote>
+<p>例如在项目中引入jQuery的webjar</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.webjars<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jquery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.6.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>一个<code>webjars</code>请求资源的例子: <a href="http://localhost:8081/webjars/jquery/3.6.0/jquery.js">http://localhost:8081/webjars/jquery/3.6.0/jquery.js</a></p>
+<h6 id="2-访问当前项目下的任何资源-静态资源文件夹"><a href="#2-访问当前项目下的任何资源-静态资源文件夹" class="headerlink" title="2./**访问当前项目下的任何资源(静态资源文件夹)"></a>2./**访问当前项目下的任何资源(静态资源文件夹)</h6><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;classpath:&#x2F;META-INF&#x2F;resources&#x2F;&quot;,</span><br><span class="line">&quot;classpath:&#x2F;resources&#x2F;&quot;, </span><br><span class="line">&quot;classpath:&#x2F;static&#x2F;&quot;, </span><br><span class="line">&quot;classpath:&#x2F;public&#x2F;&quot;</span><br><span class="line">&quot;&#x2F;&quot; : 当前项目的根路径</span><br></pre></td></tr></table></figure>
+
+<p>例如请求: <a href="http://localhost:8081/webjars-requirejs.js">http://localhost:8081/webjars-requirejs.js</a> 将会去上述静态资源文件路径中寻找<code>webjars-requirejs.js</code></p>
+<h6 id="3-欢迎页"><a href="#3-欢迎页" class="headerlink" title="3.欢迎页"></a>3.欢迎页</h6><p>静态资源文件夹下的所有<code>index.html</code>, 被<code>/**</code>映射</p>
+<p>例如: <a href="http://localhost:8081/">http://localhost:8081/</a> 将会去所有静态资源文件夹下寻找<code>index.html</code>页面</p>
+<h6 id="4-所有-favicon-ico-都是在静态资源文件下找"><a href="#4-所有-favicon-ico-都是在静态资源文件下找" class="headerlink" title="4.所有 **/favicon.ico 都是在静态资源文件下找"></a>4.所有 **/favicon.ico 都是在静态资源文件下找</h6><p>只要在静态资源文件夹下有命名为<code>favicon.ico</code>的资源, 那么网站就会显示该图标</p>
+<h6 id="5-手动配置静态资源的位置"><a href="#5-手动配置静态资源的位置" class="headerlink" title="5.手动配置静态资源的位置"></a>5.手动配置静态资源的位置</h6><p>在springboot的配置文件中指定<code>spring.resources.static-locations</code>的值</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> </span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
