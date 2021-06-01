@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SpringBoot之Thymeleaf语法 - ml</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="����˺���,
+SpringBoot之Thymeleaf语法1.导入Thymeleaf的starter1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.springfram,"> 
+    <meta name="author" content="coding"> 
+    <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ml</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SpringBoot之Thymeleaf语法</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">SpringBoot之Thymeleaf语法</h1>
+        <div class="stuff">
+            <span>六月 01, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210601220900.png"></p>
+<h1 id="SpringBoot之Thymeleaf语法"><a href="#SpringBoot之Thymeleaf语法" class="headerlink" title="SpringBoot之Thymeleaf语法"></a>SpringBoot之Thymeleaf语法</h1><h5 id="1-导入Thymeleaf的starter"><a href="#1-导入Thymeleaf的starter" class="headerlink" title="1.导入Thymeleaf的starter"></a>1.导入Thymeleaf的starter</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-Thymeleaf属性配置"><a href="#2-Thymeleaf属性配置" class="headerlink" title="2.Thymeleaf属性配置"></a>2.Thymeleaf属性配置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties(</span></span><br><span class="line"><span class="meta">    prefix = &quot;spring.thymeleaf&quot;</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThymeleafProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Charset DEFAULT_ENCODING;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">&quot;classpath:/templates/&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">&quot;.html&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> checkTemplate = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> checkTemplateLocation = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">private</span> String prefix = <span class="string">&quot;classpath:/templates/&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> String suffix = <span class="string">&quot;.html&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过配置类我们可以知道, 只要html页面放在类路径下的templates文件夹中, 那么Thymeleaf模板引擎就会对其进行渲染</p>
+<h5 id="3-Thymeleaf语法规则"><a href="#3-Thymeleaf语法规则" class="headerlink" title="3.Thymeleaf语法规则"></a>3.Thymeleaf语法规则</h5><h6 id="a-属性优先级"><a href="#a-属性优先级" class="headerlink" title="a.属性优先级"></a>a.属性优先级</h6><table>
+<thead>
+<tr>
+<th align="left">Order</th>
+<th align="left">Feature</th>
+<th align="left">属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">Fragment inclusion (包含)</td>
+<td align="left"><code>th:insert</code> <code>th:replace</code></td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">Fragment iteration (遍历)</td>
+<td align="left"><code>th:each</code></td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">Conditional evaluation (条件)</td>
+<td align="left"><code>th:if</code> <code>th:unless</code> <code>th:switch</code> <code>th:case</code></td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">Local variable definition (定义变量)</td>
+<td align="left"><code>th:object</code> <code>th:with</code></td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">General attribute modification (任意属性修改)</td>
+<td align="left"><code>th:attr</code> <code>th:attrprepend</code> <code>th:attrappend</code></td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">Specific attribute modification (特定属性修改)</td>
+<td align="left"><code>th:value</code> <code>th:href</code> <code>th:src</code> <code>...</code></td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">Text (tag body modification) (文本)</td>
+<td align="left"><code>th:text</code> 转义特殊字符<code>th:utext</code>不转义特殊字符</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">Fragment specification (声明片段)</td>
+<td align="left"><code>th:fragment</code></td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">Fragment removal (移除片段)</td>
+<td align="left"><code>th:remove</code></td>
+</tr>
+</tbody></table>
+<p> 例如: th:任意html属性, 来替换原生属性的值</p>
+<h6 id="b-标准表达式语法"><a href="#b-标准表达式语法" class="headerlink" title="b.标准表达式语法"></a>b.标准表达式语法</h6><ul>
+<li><p>Simple expressions:(简单表达式)</p>
+<ul>
+<li><p>Variable Expressions: <code>$&#123;...&#125;</code>获取变量值</p>
+<ul>
+<li>获取对象的属性, 调用方法</li>
+<li>使用内置的基本对象<ul>
+<li><code>#ctx</code>: 上下文对象。</li>
+<li><code>#vars:</code> 上下文变量。</li>
+<li><code>#locale</code>: the context locale.</li>
+<li><code>#request</code>：（仅在 Web 上下文中）<code>HttpServletRequest</code>对象。</li>
+<li><code>#response</code>：（仅在 Web 上下文中）<code>HttpServletResponse</code>对象。</li>
+<li><code>#session</code>：（仅在 Web 上下文中）<code>HttpSession</code>对象。</li>
+<li><code>#servletContext</code>：（仅在 Web 上下文中）<code>ServletContext</code>对象。</li>
+</ul>
+</li>
+<li>内置的一些工具对象<ul>
+<li><code>#execInfo</code>：关于正在处理的模板的信息。</li>
+<li><code>#messages</code>: 在变量表达式中获取外部化消息的方法，与使用 #{…} 语法获取它们的方式相同。</li>
+<li><code>#uris</code>: 转义部分 URL/URI 的方法</li>
+<li><code>#conversions</code>：执行配置的<em>转换服务的方法</em>（如果有）。</li>
+<li><code>#dates</code>：<code>java.util.Date</code>对象的方法：格式化、组件提取等。</li>
+<li><code>#calendars</code>: 类似于<code>#dates</code>，但用于<code>java.util.Calendar</code>对象。</li>
+<li><code>#numbers</code>：格式化数字对象的方法。</li>
+<li><code>#strings</code>:<code>String</code>对象的方法：包含、startsWith、前置/附加等。</li>
+<li><code>#objects</code>: 一般对象的方法。</li>
+<li><code>#bools</code>：布尔评估的方法。</li>
+<li><code>#arrays</code>: 数组的方法。</li>
+<li><code>#lists</code>：列表的方法。</li>
+<li><code>#sets</code>: 方法集。</li>
+<li><code>#maps</code>: 地图方法。</li>
+<li><code>#aggregates</code>: 在数组或集合上创建聚合的方法。</li>
+<li><code>#ids</code>: 处理可能重复的 id 属性的方法（例如，作为迭代的结果）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Selection Variable Expressions: <code>*&#123;...&#125;</code>变量表达式不仅可以写成<code>$&#123;...&#125;</code>，还可以写成<code>*&#123;...&#125;</code>.</p>
+<p>但是有一个重要的区别：星号语法评估<em>选定对象</em>上的表达式，而不是整个上下文。也就是说，只要没有选定对象，美元和星号的语法就完全一样。</p>
+<p>什么是选定对象？使用<code>th:object</code>属性的表达式的结果。让我们在我们的用户资料 ( <code>userprofile.html</code>) 页面中使用一个：</p>
+<p>其实<code>*&#123;...&#125;</code>就是配合<code>th:object</code>使用的</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:object</span>=<span class="string">&quot;$&#123;session.user&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Name: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;firstName&#125;&quot;</span>&gt;</span>Sebastian<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Surname: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;lastName&#125;&quot;</span>&gt;</span>Pepper<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>Nationality: <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">&quot;*&#123;nationality&#125;&quot;</span>&gt;</span>Saturn<span class="tag">&lt;/<span class="name">span</span>&gt;</span>.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Message Expressions: <code>#&#123;...&#125;</code>获取国际化内容</p>
+</li>
+<li><p>Link URL Expressions: <code>@&#123;...&#125;</code>定义URL</p>
+</li>
+<li><p>Fragment Expressions: <code>~&#123;...&#125;</code>片段引用表达式</p>
+</li>
+</ul>
+</li>
+<li><p>Literals(字面量)</p>
+<ul>
+<li>Text literals: <code>&#39;one text&#39;</code>, <code>&#39;Another one!&#39;</code>,…</li>
+<li>Number literals: <code>0</code>, <code>34</code>, <code>3.0</code>, <code>12.3</code>,…</li>
+<li>Boolean literals: <code>true</code>, <code>false</code></li>
+<li>Null literal: <code>null</code></li>
+<li>Literal tokens: <code>one</code>, <code>sometext</code>, <code>main</code>,…</li>
+</ul>
+</li>
+<li><p>Text operations:(文本操作)</p>
+<ul>
+<li>String concatenation: <code>+</code></li>
+<li>Literal substitutions: <code>|The name is $&#123;name&#125;|</code></li>
+</ul>
+</li>
+<li><p>Arithmetic operations:(数学运算)</p>
+<ul>
+<li>Binary operators: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
+<li>Minus sign (unary operator): <code>-</code></li>
+</ul>
+</li>
+<li><p>Boolean operations:(布尔运算)</p>
+<ul>
+<li>Binary operators: <code>and</code>, <code>or</code></li>
+<li>Boolean negation (unary operator): <code>!</code>, <code>not</code></li>
+</ul>
+</li>
+<li><p>Comparisons and equality:(比较运算)</p>
+<ul>
+<li>Comparators: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code> (<code>gt</code>, <code>lt</code>, <code>ge</code>, <code>le</code>)</li>
+<li>Equality operators: <code>==</code>, <code>!=</code> (<code>eq</code>, <code>ne</code>)</li>
+</ul>
+</li>
+<li><p>Conditional operators:(条件运算)</p>
+<ul>
+<li>If-then: <code>(if) ? (then)</code></li>
+<li>If-then-else: <code>(if) ? (then) : (else)</code></li>
+<li>Default: <code>(value) ?: (defaultvalue)</code></li>
+</ul>
+</li>
+<li><p>Special tokens:</p>
+<ul>
+<li>No-Operation: <code>_</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="4-关于行内写法-和"><a href="#4-关于行内写法-和" class="headerlink" title="4.关于行内写法[[]]和[()]"></a>4.关于行内写法[[]]和[()]</h5><ol>
+<li><p><code>[[]]</code> 也就是<code>th:text</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The message is &quot;[[$&#123;msg&#125;]]&quot;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>[()]</code> 也就是<code>th:utext</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>The message is &quot;[($&#123;msg&#125;)]&quot;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
