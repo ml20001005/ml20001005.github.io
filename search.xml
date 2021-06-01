@@ -2817,4 +2817,36 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之扩展与全面接管SpringMVC</title>
+    <url>/2021/06/01/SpringBoot%E4%B9%8B%E6%89%A9%E5%B1%95%E4%B8%8E%E5%85%A8%E9%9D%A2%E6%8E%A5%E7%AE%A1SpringMVC/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210601231252.png"></p>
+<h1 id="SpringBoot之扩展与全面接管SpringMVC"><a href="#SpringBoot之扩展与全面接管SpringMVC" class="headerlink" title="SpringBoot之扩展与全面接管SpringMVC"></a>SpringBoot之扩展与全面接管SpringMVC</h1><p>If you want to keep those Spring Boot MVC customizations and make more <a href="https://docs.spring.io/spring-framework/docs/5.3.7/reference/html/web.html#mvc">MVC customizations</a> (interceptors, formatters, view controllers, and other features), you can add your own <code>@Configuration</code> class of type <code>WebMvcConfigurer</code> but <strong>without</strong> <code>@EnableWebMvc</code>.</p>
+<p>If you want to provide custom instances of <code>RequestMappingHandlerMapping</code>, <code>RequestMappingHandlerAdapter</code>, or <code>ExceptionHandlerExceptionResolver</code>, and still keep the Spring Boot MVC customizations, you can declare a bean of type <code>WebMvcRegistrations</code> and use it to provide custom instances of those components.</p>
+<p>If you want to take complete control of Spring MVC, you can add your own <code>@Configuration</code> annotated with <code>@EnableWebMvc</code>, or alternatively add your own <code>@Configuration</code>-annotated <code>DelegatingWebMvcConfiguration</code> as described in the Javadoc of <code>@EnableWebMvc</code>.</p>
+<h5 id="1-扩展springmvc"><a href="#1-扩展springmvc" class="headerlink" title="1.扩展springmvc"></a>1.扩展springmvc</h5><p>在springboot配置类中实现<code>WebMvcConfigurer</code> 接口</p>
+<p>例如添加一个视图控制器</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySpringMVCConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addViewControllers</span><span class="params">(ViewControllerRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addViewController(<span class="string">&quot;/atguigu&quot;</span>).setViewName(<span class="string">&quot;success&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-全面接管springmvc"><a href="#2-全面接管springmvc" class="headerlink" title="2.全面接管springmvc"></a>2.全面接管springmvc</h5><p>在实现<code>WebMvcConfigurer</code> 接口的配置类上加上<code>@EnableWebMvc</code>注解</p>
+<p>因为在Web Mvc 自动配置类中有</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration(</span></span><br><span class="line"><span class="meta">    proxyBeanMethods = false</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="meta">@ConditionalOnWebApplication(</span></span><br><span class="line"><span class="meta">    type = Type.SERVLET</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(&#123;Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class&#125;)</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(&#123;WebMvcConfigurationSupport.class&#125;)</span> <span class="comment">//注意这里</span></span><br><span class="line"><span class="meta">@AutoConfigureOrder(-2147483638)</span></span><br><span class="line"><span class="meta">@AutoConfigureAfter(&#123;DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class, ValidationAutoConfiguration.class&#125;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcAutoConfiguration</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<p>在Web Mvc 自动配置类中<code>@ConditionalOnMissingBean(&#123;WebMvcConfigurationSupport.class&#125;)</code> 说明在IOC容器中没有<code>WebMvcConfigurationSupport</code>类型的bean时, 自动配置才生效, 但是在<code>@EnableWebMvc</code>注解中有</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Target(&#123;ElementType.TYPE&#125;)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import(&#123;DelegatingWebMvcConfiguration.class&#125;)</span> <span class="comment">//注意这里</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableWebMvc &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>@EnableWebMvc</code>中导入了一个配置类<code>DelegatingWebMvcConfiguration</code>, 而<code>DelegatingWebMvcConfiguration</code>类是这样的</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration(</span></span><br><span class="line"><span class="meta">    proxyBeanMethods = false</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说<code>@EnableWebMvc</code>注解向IOC容器中注入了一个<code>WebMvcConfigurationSupport</code>类型的组件, 导致Web Mvc 自动配置类失效, 从而达到了全面接管springmvc</p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
