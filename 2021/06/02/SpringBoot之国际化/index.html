@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SpringBoot之国际化 - ml</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="Fechin,"> 
+    <meta name="description" content="����˺���,
+SpringBoot之国际化1.编写国际化配置文件一般有三个文件, 分别是默认配置, 中文配置, 英文配置
+​    例如一个登陆页面的国际化配置文件
+
+login.properties
+1234,"> 
+    <meta name="author" content="coding"> 
+    <link rel="alternative" href="atom.xml" title="ml" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    
+    
+<link rel="stylesheet" href="/css/diaspora.css">
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">ml</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="iconfont icon-home image-icon" href="javascript:;" data-url="http://example.com"></a>
+    <div title="播放/暂停" class="iconfont icon-play"></div>
+    <h3 class="subtitle">SpringBoot之国际化</h3>
+    <div class="social">
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="iconfont icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">SpringBoot之国际化</h1>
+        <div class="stuff">
+            <span>六月 02, 2021</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210602180439.jpg"></p>
+<h1 id="SpringBoot之国际化"><a href="#SpringBoot之国际化" class="headerlink" title="SpringBoot之国际化"></a>SpringBoot之国际化</h1><h5 id="1-编写国际化配置文件"><a href="#1-编写国际化配置文件" class="headerlink" title="1.编写国际化配置文件"></a>1.编写国际化配置文件</h5><p>一般有三个文件, 分别是默认配置, 中文配置, 英文配置</p>
+<p>​    例如一个登陆页面的国际化配置文件</p>
+<ol>
+<li><p>login.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">login.password</span>=<span class="string">密码</span></span><br><span class="line"><span class="meta">login.remember</span>=<span class="string">记住我</span></span><br><span class="line"><span class="meta">login.tip</span>=<span class="string">请登录</span></span><br><span class="line"><span class="meta">login.username</span>=<span class="string">用户名</span></span><br><span class="line"><span class="meta">login.sign</span>=<span class="string">登录</span></span><br></pre></td></tr></table></figure></li>
+<li><p>login_en_US.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">login.password</span>=<span class="string">Password</span></span><br><span class="line"><span class="meta">login.remember</span>=<span class="string">Remember me</span></span><br><span class="line"><span class="meta">login.tip</span>=<span class="string">Please sign in</span></span><br><span class="line"><span class="meta">login.username</span>=<span class="string">Username</span></span><br><span class="line"><span class="meta">login.sign</span>=<span class="string">sign in</span></span><br></pre></td></tr></table></figure></li>
+<li><p>login_zh_CN.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">login.password</span>=<span class="string">密码</span></span><br><span class="line"><span class="meta">login.remember</span>=<span class="string">记住我</span></span><br><span class="line"><span class="meta">login.tip</span>=<span class="string">请登录</span></span><br><span class="line"><span class="meta">login.username</span>=<span class="string">用户名</span></span><br><span class="line"><span class="meta">login.sign</span>=<span class="string">登录</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="2-springboot关于国际化的自动配置"><a href="#2-springboot关于国际化的自动配置" class="headerlink" title="2.springboot关于国际化的自动配置"></a>2.springboot关于国际化的自动配置</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&#123;@link EnableAutoConfiguration Auto-configuration&#125; for &#123;@link MessageSource&#125;.  为国际化的自动配置</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageSourceAutoConfiguration</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Resource[] NO_RESOURCES = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="meta">@ConfigurationProperties(prefix = &quot;spring.messages&quot;)</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> MessageSourceProperties <span class="title">messageSourceProperties</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> MessageSourceProperties();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> MessageSource <span class="title">messageSource</span><span class="params">(MessageSourceProperties properties)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//ResourceBundleMessageSource 管理国际化资源文件</span></span><br><span class="line">		ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</span><br><span class="line">		<span class="keyword">if</span> (StringUtils.hasText(properties.getBasename())) &#123;</span><br><span class="line">			messageSource.setBasenames(StringUtils</span><br><span class="line">					.commaDelimitedListToStringArray(StringUtils.trimAllWhitespace(properties.getBasename())));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (properties.getEncoding() != <span class="keyword">null</span>) &#123;</span><br><span class="line">			messageSource.setDefaultEncoding(properties.getEncoding().name());</span><br><span class="line">		&#125;</span><br><span class="line">		messageSource.setFallbackToSystemLocale(properties.isFallbackToSystemLocale());</span><br><span class="line">		Duration cacheDuration = properties.getCacheDuration();</span><br><span class="line">		<span class="keyword">if</span> (cacheDuration != <span class="keyword">null</span>) &#123;</span><br><span class="line">			messageSource.setCacheMillis(cacheDuration.toMillis());</span><br><span class="line">		&#125;</span><br><span class="line">		messageSource.setAlwaysUseMessageFormat(properties.isAlwaysUseMessageFormat());</span><br><span class="line">		messageSource.setUseCodeAsDefaultMessage(properties.isUseCodeAsDefaultMessage());</span><br><span class="line">		<span class="keyword">return</span> messageSource;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>MessageSourceAutoConfiguration</code>类是springboot中为国际化的自动配置类, 而<code>ResourceBundleMessageSource</code>类用于管理国际化资源文件</p>
+<p>当我们自己编写了国际化配置文件时, 需要在springboot的默认配置文件中指定<code>spring.messages.basename</code>的值用于解析国际化配置文件, 如果值不包含包限定, 那么将直接从classpath类路径下进行解析</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageSourceProperties</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Comma-separated list of basenames (essentially a fully-qualified classpath</span></span><br><span class="line"><span class="comment">	 * location), each following the ResourceBundle convention with relaxed support for</span></span><br><span class="line"><span class="comment">	 * slash based locations. If it doesn&#x27;t contain a package qualifier (such as</span></span><br><span class="line"><span class="comment">	 * &quot;org.mypackage&quot;), it will be resolved from the classpath root.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> String basename = <span class="string">&quot;messages&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>例如login.properties, login_en_US.properties, login_zh_CN.properties 三个配置文件在classpath类路径下的i18n包下, 那么<code>spring.messages.basename</code>为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">messages:</span></span><br><span class="line">    <span class="attr">basename:</span> <span class="string">i18n.login</span></span><br></pre></td></tr></table></figure>
+
+<p><code>spring.messages.basename</code> = 包限定.资源绑定名</p>
+<h5 id="3-在页面中获取国际化的值"><a href="#3-在页面中获取国际化的值" class="headerlink" title="3.在页面中获取国际化的值"></a>3.在页面中获取国际化的值</h5><p>使用thymeleaf的国际化取值表达式<code>#&#123;&#125;</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">class</span>=<span class="string">&quot;form-signin&quot;</span> <span class="attr">action</span>=<span class="string">&quot;dashboard.html&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;mb-4&quot;</span> <span class="attr">src</span>=<span class="string">&quot;asserts/img/bootstrap-solid.svg&quot;</span> <span class="attr">th:src</span>=<span class="string">&quot;@&#123;/asserts/img/bootstrap-solid.svg&#125;&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">width</span>=<span class="string">&quot;72&quot;</span> <span class="attr">height</span>=<span class="string">&quot;72&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;h3 mb-3 font-weight-normal&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;#&#123;login.tip&#125;&quot;</span>&gt;</span>Please sign in<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>Username<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Username&quot;</span> <span class="attr">th:placeholder</span>=<span class="string">&quot;#&#123;login.username&#125;&quot;</span> <span class="attr">required</span>=<span class="string">&quot;&quot;</span> <span class="attr">autofocus</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">label</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>Password<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">class</span>=<span class="string">&quot;form-control&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Password&quot;</span> <span class="attr">th:placeholder</span>=<span class="string">&quot;#&#123;login.password&#125;&quot;</span> <span class="attr">required</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;checkbox mb-3&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkbox&quot;</span> <span class="attr">value</span>=<span class="string">&quot;remember-me&quot;</span>&gt;</span> [[#&#123;login.remember&#125;]]</span><br><span class="line">        <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-lg btn-primary btn-block&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">th:text</span>=<span class="string">&quot;#&#123;login.sign&#125;&quot;</span>&gt;</span>Sign in<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;mt-5 mb-3 text-muted&quot;</span>&gt;</span>© 2017-2018<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm&quot;</span>&gt;</span>中文<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sm&quot;</span>&gt;</span>English<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们的浏览器使用不同的语言时, 将会有不同的效果</p>
+<h5 id="4-点击链接切换国际化"><a href="#4-点击链接切换国际化" class="headerlink" title="4.点击链接切换国际化"></a>4.点击链接切换国际化</h5><p>原理：</p>
+<p>​    国际化<code>Locale</code>（区域信息对象）；<code>LocaleResolver</code>（区域信息解析器）；</p>
+<p>在<code>WebMvcAutoConfiguration</code>中有如下, 也就是如果容器中没有<code>LocaleResolver</code>的实现类, 那么就使用自动配置的, 否则使用用户自己配置的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(</span></span><br><span class="line"><span class="meta">    prefix = &quot;spring.mvc&quot;,</span></span><br><span class="line"><span class="meta">    name = &#123;&quot;locale&quot;&#125;</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> LocaleResolver <span class="title">localeResolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.mvcProperties.getLocaleResolver() == org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.LocaleResolver.FIXED) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> FixedLocaleResolver(<span class="keyword">this</span>.mvcProperties.getLocale());</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        AcceptHeaderLocaleResolver localeResolver = <span class="keyword">new</span> AcceptHeaderLocaleResolver();</span><br><span class="line">        localeResolver.setDefaultLocale(<span class="keyword">this</span>.mvcProperties.getLocale());</span><br><span class="line">        <span class="keyword">return</span> localeResolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在我们自己没有配置<code>LocaleResolver</code>的情况下, springboot默认使用的是<code>AcceptHeaderLocaleResolver</code>, 根据请求头中的<strong>Accept-Language</strong>确定使用什么语言环境, 所以如果要使用点击切换语言环境, 那么我们可以自己实现<code>LocaleResolver</code>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLocaleResolverDemo</span> <span class="keyword">implements</span> <span class="title">LocaleResolver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Locale <span class="title">resolveLocale</span><span class="params">(HttpServletRequest request)</span> </span>&#123;</span><br><span class="line">        String l = request.getParameter(<span class="string">&quot;l&quot;</span>);</span><br><span class="line">        Locale locale = Locale.getDefault();</span><br><span class="line">        <span class="keyword">if</span> (!StringUtils.isEmpty(l))&#123;</span><br><span class="line">            String[] s = l.split(<span class="string">&quot;_&quot;</span>);</span><br><span class="line">            locale = <span class="keyword">new</span> Locale(s[<span class="number">0</span>],s[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> locale;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLocale</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Locale locale)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将<code>LocaleResolver</code>的实现类加入IOC容器, 替换自动配置的区域信息解析器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> LocaleResolver <span class="title">localeResolver</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyLocaleResolverDemo();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的实现中根据请求参数创建<code>Locale</code>对象, 实现点击切换语言环境, 因为此时, 自动配置的区域信息解析器已经被替换, 所以更换浏览器的语言设置也无法实现语言环境的切换, 都是使用默认的语言环境, 只有在请求参数中携带区域信息才能切换语言环境</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/425570952.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+		data-enable='false'
+        data-ae='false'
+        data-ci=''
+        data-cs=''
+        data-r=''
+        data-o=''
+        data-a=''
+        data-d='false'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+
+
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/typed.js"></script>
+<script src="/js/diaspora.js"></script>
+
+
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+
+
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+</html>
