@@ -2916,4 +2916,60 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之使用thymeleaf进行页面抽取</title>
+    <url>/2021/06/05/SpringBoot%E4%B9%8B%E4%BD%BF%E7%94%A8thymeleaf%E8%BF%9B%E8%A1%8C%E9%A1%B5%E9%9D%A2%E6%8A%BD%E5%8F%96/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210605184038.jpg"></p>
+<h1 id="SpringBoot之使用thymeleaf进行页面抽取"><a href="#SpringBoot之使用thymeleaf进行页面抽取" class="headerlink" title="SpringBoot之使用thymeleaf进行页面抽取"></a>SpringBoot之使用thymeleaf进行页面抽取</h1><h5 id="1-使用th-fragment标签定义公共片段"><a href="#1-使用th-fragment标签定义公共片段" class="headerlink" title="1.使用th:fragment标签定义公共片段"></a>1.使用th:fragment标签定义公共片段</h5><p>例如在类路径下的templates目录下的dashboard.html页面中, 定义一个公共片段</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0&quot;</span> <span class="attr">th:fragment</span>=<span class="string">&quot;topbar&quot;</span>&gt;</span></span><br><span class="line">	这是公共片段的内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-使用th-replace标签引入公共片段"><a href="#2-使用th-replace标签引入公共片段" class="headerlink" title="2.使用th:replace标签引入公共片段"></a>2.使用th:replace标签引入公共片段</h5><p>例如在类路径下的templates目录下的list.html页面中, 引用一个公共片段</p>
+<p>引用方式:</p>
+<ol>
+<li><p>~{templateName::fragmentName} 模板名::片段名</p>
+</li>
+<li><p>~{templateName::selector} 模板名::选择器</p>
+<p>模板名其实就是thymeleaf模板引擎渲染的页面, 片段名就是<code>th:fragment</code>标签的属性值, 选择器就是前端中的各种选择器(id, class…)</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;~&#123;dashboard::topbar&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>上述代码等效于</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0&quot;</span> <span class="attr">th:fragment</span>=<span class="string">&quot;topbar&quot;</span>&gt;</span></span><br><span class="line">	这是公共片段的内容</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-三种引用片段的区别"><a href="#3-三种引用片段的区别" class="headerlink" title="3.三种引用片段的区别"></a>3.三种引用片段的区别</h5><p>引用片段的方法有三种</p>
+<ol>
+<li><code>th:insert</code> 是最简单的：它会简单地插入指定的片段作为其宿主标签的主体。</li>
+<li><code>th:replace</code>实际上用指定的片段替换其主机标记。</li>
+<li><code>th:include</code>与 类似<code>th:insert</code>，但它不插入片段，而是仅插入此片段的<em>内容</em>。</li>
+</ol>
+<p>例如在类路径下的templates目录下的footer页面中有如下片段</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">th:fragment</span>=<span class="string">&quot;copy&quot;</span>&gt;</span></span><br><span class="line">  <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>分别使用上述三种方式引用片段</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:insert</span>=<span class="string">&quot;footer::copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;footer::copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:include</span>=<span class="string">&quot;footer::copy&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果分别为</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">  <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="symbol">&amp;copy;</span> 2011 The Good Thymes Virtual Grocery</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-携带参数的片段"><a href="#4-携带参数的片段" class="headerlink" title="4.携带参数的片段"></a>4.携带参数的片段</h5><p>在引用公共片段时我们可以在片段名的后面追加参数(写在小括号中, 若有多个参数, 用逗号隔开), 这样在片段中我们就可以使用这些参数, 例如如下</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;comm/bar::sidebar(activeUri=&#x27;main.html&#x27;)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">th:replace</span>=<span class="string">&quot;comm/bar::sidebar(activeUri=&#x27;list&#x27;)&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如下被引用的片段将根据参数来调整哪个标签将被激活, 处于活动状态</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">&quot;col-md-2 d-none d-md-block bg-light sidebar&quot;</span> <span class="attr">th:fragment</span>=<span class="string">&quot;sidebar&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;sidebar-sticky&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;nav flex-column&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;nav-link&quot;</span> <span class="attr">th:class</span>=<span class="string">&quot;$&#123;activeUri==&#x27;main.html&#x27;?&#x27;nav-link active&#x27;:&#x27;nav-link&#x27;&#125;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/main.html&#125;&quot;</span> &gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;nav-item&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">&quot;nav-link&quot;</span> <span class="attr">th:class</span>=<span class="string">&quot;$&#123;activeUri==&#x27;list&#x27;?&#x27;nav-link active&#x27;:&#x27;nav-link&#x27;&#125;&quot;</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span> <span class="attr">th:href</span>=<span class="string">&quot;@&#123;/list&#125;&quot;</span> &gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
