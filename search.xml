@@ -2972,4 +2972,30 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之日期格式和hiddenmethod</title>
+    <url>/2021/06/06/SpringBoot%E4%B9%8B%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F%E5%92%8Chiddenmethod/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210606183544.jpg"></p>
+<h1 id="SpringBoot之日期格式和hiddenmethod"><a href="#SpringBoot之日期格式和hiddenmethod" class="headerlink" title="SpringBoot之日期格式和hiddenmethod"></a>SpringBoot之日期格式和hiddenmethod</h1><h5 id="1-日期格式的转换"><a href="#1-日期格式的转换" class="headerlink" title="1.日期格式的转换"></a>1.日期格式的转换</h5><p>在springboot中, 默认的日期格式使用 <code>/</code> 分割</p>
+<p>通过如下属性配置可以修改日期格式</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">format:</span></span><br><span class="line">      <span class="attr">date:</span> <span class="string">yyyy-MM-dd</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-关于请求方式转换"><a href="#2-关于请求方式转换" class="headerlink" title="2.关于请求方式转换"></a>2.关于请求方式转换</h5><p>在springboot中默认只有<code>get</code>和<code>post</code>两种请求, 但是我们可以使用隐藏请求去替换默认请求</p>
+<p>使用如下方法</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;put&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;_method&quot;</span> <span class="attr">value</span>=<span class="string">&quot;delete&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但是springboot默认关闭了spring的<code>hiddenmethod</code>过滤器, 所以需要配置启用</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">hiddenmethod:</span></span><br><span class="line">      <span class="attr">filter:</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就可以使用<code>_method</code>转换请求方式了</p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
