@@ -3126,4 +3126,41 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之使用外部servlet容器</title>
+    <url>/2021/06/11/SpringBoot%E4%B9%8B%E4%BD%BF%E7%94%A8%E5%A4%96%E9%83%A8servlet%E5%AE%B9%E5%99%A8/</url>
+    <content><![CDATA[<p><img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210611190128.jpg"></p>
+<h1 id="SpringBoot之使用外部servlet容器"><a href="#SpringBoot之使用外部servlet容器" class="headerlink" title="SpringBoot之使用外部servlet容器"></a>SpringBoot之使用外部servlet容器</h1><p>嵌入式Servlet容器：应用打成可执行的jar</p>
+<p>​        优点：简单、便携；</p>
+<p>​        缺点：默认不支持JSP、优化定制比较复杂（使用定制器【ServerProperties、自定义EmbeddedServletContainerCustomizer】，自己编写嵌入式Servlet容器的创建工厂【EmbeddedServletContainerFactory】）；</p>
+<p>外置的Servlet容器：外面安装Tomcat—应用war包的方式打包；</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><p>1）、必须创建一个<code>war</code>项目；（利用idea创建好目录结构）</p>
+<ol start="2">
+<li><p> 、添加<code>webapp</code>目录 : 可以手动添加, 也可以在<code>Project Structure</code>中的<code>Modules</code>中的<code>Web Resource Directories</code>下双击红色目录自动生成, 然后在<code>Deployment Descriptors</code>下添加<code>web.xml</code>文件到<code>webapp</code>目录下的<code>WEB-INF</code>下</p>
+</li>
+<li><p> 、配置外部Tomcat容器 : </p>
+</li>
+</ol>
+<p>4）、将嵌入式的Tomcat指定为provided；</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>、在springboot的配置文件中配置解析<code>jsp</code>页面的路径前后缀</li>
+</ol>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">spring.mvc.view.prefix</span>=<span class="string">/WEB-INF/</span></span><br><span class="line"><span class="meta">spring.mvc.view.suffix</span>=<span class="string">.jsp</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>5）、必须编写一个<strong>SpringBootServletInitializer</strong>的子类，并调用configure方法 (这个类使用springboot时一般会自动生成)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletInitializer</span> <span class="keyword">extends</span> <span class="title">SpringBootServletInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">   <span class="function"><span class="keyword">protected</span> SpringApplicationBuilder <span class="title">configure</span><span class="params">(SpringApplicationBuilder application)</span> </span>&#123;</span><br><span class="line">       <span class="comment">//传入SpringBoot应用的主程序</span></span><br><span class="line">      <span class="keyword">return</span> application.sources(SpringBoot04WebJspApplication.class);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>6）、启动服务器就可以使用；</p>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
