@@ -3272,4 +3272,35 @@
         <tag>笔记</tag>
       </tags>
   </entry>
+  <entry>
+    <title>SpringBoot之前后端分离跨域问题</title>
+    <url>/2021/06/20/SpringBoot%E4%B9%8B%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<img src="https://cdn.jsdelivr.net/gh/ml20001005/imgs//data/20210620145243.jpg" style="zoom:50%;" />
+
+<ol>
+<li>在前后端分离的项目中可能存在前端项目的访问端口和后端项目不一致的情况, 这个时候需要我们修改端口为一致的</li>
+<li>在前后端分离的项目中, 前端项目因为测试的需要会有自己的内部数据数据用于测试验证方案的可行性, 但如果将前后端结合时, 我们的数据都来源于后端, 所以这个时候我们需要将前端自己内部的mock去除, 从而配合后端</li>
+</ol>
+<h3 id="解决跨域问题"><a href="#解决跨域问题" class="headerlink" title="解决跨域问题"></a>解决跨域问题</h3><p>在前后端分离的项目中即使前后端端口一致, 也不能解决跨域的问题, 还需要在后端中进行配置</p>
+<ul>
+<li>配置需要跨域的地址</li>
+<li>配置跨域的请求头</li>
+<li>配置跨域的请求方法</li>
+<li>配置跨域请求是否可以携带cookie</li>
+</ul>
+<p>如果使用配置类, 那么这个配置将是全局的, 如果使用注解那这个配置只对一个@Controller生效</p>
+<ol>
+<li><p>配置类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CorsConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> CorsConfiguration <span class="title">corsConfiguration</span><span class="params">()</span></span>&#123;</span><br><span class="line">        CorsConfiguration configuration = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        configuration.addAllowedOrigin(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        configuration.addAllowedHeader(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        configuration.addAllowedMethod(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">        configuration.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">return</span> configuration;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsFilter <span class="title">corsFilter</span><span class="params">()</span></span>&#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">&quot;/**&quot;</span>,corsConfiguration());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>注解</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@CrossOrigin(origins = &quot;*&quot;,allowedHeaders = &quot;*&quot;,allowCredentials = &quot;true&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/auth/login&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;===test===&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>springboot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
 </search>
